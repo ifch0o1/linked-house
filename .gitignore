@@ -4,8 +4,8 @@ composer.phar
 composer.lock
 .DS_Store
 Thumbs.db
-
 /public/vhost-custom-log.log
+/app/config/database.php
 
 =======
 .env.*.php
