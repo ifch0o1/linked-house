@@ -1,16 +1,10 @@
 /bootstrap/compiled.php
 <<<<<<< HEAD
-/vendor
 composer.phar
 composer.lock
 .DS_Store
 Thumbs.db
 
-/public/blog/**
-/public/blogTEMP/**
-/public/docs/**
-/public/stackoverflow/**
-/public/test/**
 =======
 .env.*.php
 .env.php
