@@ -9,7 +9,7 @@
 
 namespace Readers;
 
-use Interfaces\IReaderInterface;
+use Interfaces/IReaderInterface;
 
 class DatabaseReader implements IReaderInterface {
 
@@ -23,7 +23,9 @@ class DatabaseReader implements IReaderInterface {
         if (!$specificTable) {
             return $this->readAllUserData($_userId);
         }
-        return $this->readSpecificUserData($_userId, $specificTable);
+        else {
+            return $this->readSpecificUserData($_userId, $specificTable);
+        }
     } 
 
     private function readAllUserData($_userId) {
