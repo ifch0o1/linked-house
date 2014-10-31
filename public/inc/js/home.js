@@ -104,7 +104,7 @@ refreshFavoritesCount();
 
     slider.init('580', '160', paths);
     slider.render();
-    slider.start(30);
+    slider.start(7);
 })();
 
 // TODO move settings varable in annonymous sunction.

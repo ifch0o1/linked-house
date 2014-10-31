@@ -1,13 +1,14 @@
+# Default ignores
 /bootstrap/compiled.php
-<<<<<<< HEAD
 composer.phar
 composer.lock
 .DS_Store
 Thumbs.db
-/public/vhost-custom-log.log
-/app/config/database.php
-
-=======
 .env.*.php
 .env.php
->>>>>>> 050ee8d4b5d1acae4452a63944155089b626f716
+
+#Local log files ignore
+public/*.log
+
+#DataBase local configuration ignore
+app/config/database.php
