@@ -5,6 +5,8 @@ composer.lock
 .DS_Store
 Thumbs.db
 
+/public/vhost-custom-log.log
+
 =======
 .env.*.php
 .env.php
