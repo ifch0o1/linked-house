@@ -70,7 +70,6 @@ class UserControl extends User {
     }
 
     public function authenticate() {
-        $userName = isset(Session::get('_ua._u')) ? Session::get('_ua._u') || false;
         $this->setUsername(Session::get('_ua._u'));
         
         if ($this->username) {
