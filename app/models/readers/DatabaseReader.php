@@ -9,7 +9,7 @@
 
 namespace Readers;
 
-use Interfaces/IReaderInterface;
+use Interfaces\IReaderInterface;
 
 class DatabaseReader implements IReaderInterface {
 

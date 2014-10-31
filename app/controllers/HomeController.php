@@ -7,8 +7,8 @@
  */
 //namespace App\Controllers;
 
-use Interfaces/IReaderInterface;
-use Readers/DatabaseReader;
+use Interfaces\IReaderInterface;
+use Readers\DatabaseReader;
 
 class HomeController extends Controller {
 
