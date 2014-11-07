@@ -1,8 +1,45 @@
-// This file contain event handlers
+/*
+    This file contain event handlers    
+*/
 
+// Forecast Config
+function bindForecastConfig() {
+    var forecastConfig = $('#forecast_config');
+    forecastConfig.unbind('click');
+
+    var configInstance = null;
+    forecastConfig.on('click', function() {
+        if (!configInstance) {
+            configInstance = new WeatherConfiguration(
+                window.ForecastController, $('#forecast_config_conteiner'));
+        }
+        configInstance.show(!configInstance.isVisible());
+    });
+    window.bindForecastSuggestions = function() {
+        $('.city_suggestion').on('click', function() {
+            var data = _elementDataToJSON($(this));
+            window.ForecastController.saveData(data);
+            var location = data.lat + ',' + data.lon;
+            Weather.getForecast(['forecast', 'conditions'], location, function(response) {
+                window.ForecastController.rerender(response, 'C');
+            });
+        });
+
+        function _elementDataToJSON(element) {
+            return {
+                c: element.attr('c'),
+                lat: element.attr('lat'),
+                lon: element.attr('lon')
+            }
+        }
+    }
+}
+
+/*
+    DOM Ready events
+*/
 $(document).ready(function() {
-
-//    GETTING FAVORITE FORM INFORMATION
+    // GETTING FAVORITE FORM INFORMATION
 
     $('#fav_form_button').on('click', function() {
         var data = getFavFormInformation();
@@ -14,7 +51,7 @@ $(document).ready(function() {
         };
     });
 
-//    SELECTING TABS 
+    // SELECTING TABS 
     function bindTabClick() {
         $('.favorite_tab').on('click', function() {
             if (!$(this).hasClass('selected_tab')) {
@@ -26,9 +63,9 @@ $(document).ready(function() {
     }
     bindTabClick();
 
-//    Selecting colors event
+    // Selecting colors event
 
-//    Add new favorite and favorite form activation events
+    // Add new favorite and favorite form activation events
 
     $('#add_favorite_button').on('click', function() {
         var $form = $('#fav_form');
@@ -41,7 +78,7 @@ $(document).ready(function() {
         FavFormEvent.activeColorClick();
     });
 
-//    FAVORITE FORM KEYPRESS AND BUTTON
+    // FAVORITE FORM KEYPRESS AND BUTTON
 
     var FavFormEvent = {
         activeInputKeyPress: function() {
@@ -112,7 +149,7 @@ $(document).ready(function() {
         favFormFx.removeFocus();
     });
 
-//      Favorite options and default buttons.
+    // Favorite options and default buttons.
     var FavState = {
         showOptions: function(favId) {
             var $defaultState = $('#fav_' + favId).find('.favorite_default_state');
@@ -128,7 +165,7 @@ $(document).ready(function() {
         }
     };
 
-    //TODO refactor below function code.
+    // TODO refactor below function code.
         function bindFavEditButtons() {
         $('.favorite_rename_button').unbind('click');
         $('.favorite_rename_button').bind('click', function() {
@@ -210,7 +247,7 @@ $(document).ready(function() {
     window.bindFavoriteButtons = bindFavoriteButtons;
     bindFavoriteButtons();
     
-//      Tab options buttons [ TAB EDIT ]
+    // Tab options buttons [ TAB EDIT ]
     function _getTabElementInfo($buttonEl) {
         $tabEl = $buttonEl.parent().parent();
         tabId = convertIdToNumber($tabEl.attr('id'), 10);
@@ -272,7 +309,7 @@ $(document).ready(function() {
     window.bindTabButtons = bindTabButtons;
     bindTabButtons();
 
-    //New Tab
+    // New Tab
     (function() {
         //Form
 
@@ -297,7 +334,7 @@ $(document).ready(function() {
     })();
 
     (function() {
-        //Add button
+        // Add button
 
         var addBtn = $('#add_new_tab_button').bind('click', function() {
             var $input = $('#new_tab_input');
@@ -334,12 +371,10 @@ $(document).ready(function() {
         });
     }
 
+    //User Settings
     $('#user_settings_button').unbind('click');
     $('#user_settings_button').on('click', function() {
         $('#user_settings').slideToggle(300);
     });
-
-
-
 
 });

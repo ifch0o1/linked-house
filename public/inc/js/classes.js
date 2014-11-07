@@ -98,6 +98,7 @@ var Favorite = {
         });
 
         $('#fav_' + this.id).remove();
+        refreshFavoritesCount();
     },
     
     changePosition: function() {
@@ -580,7 +581,7 @@ var SliderFx = {
             duration: speed,
             queue: false
         });
-    }
+    },
 }
 
 function InputTextEditor($el, value) {
@@ -660,7 +661,7 @@ function ElementFx($element) {
         this.$element.css({
             'z-index': '200000'
         });
-    },
+    }
     this.removeFocus = function() {
         if (!this._extraElement) {
             throw new Error('ElementFx.removeFocus() cannot remove focus from unfocused element [_extraElement] is ' + this._extraElement);

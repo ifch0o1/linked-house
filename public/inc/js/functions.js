@@ -413,6 +413,14 @@ function checkKeyCode(code) {
     }
 }
 
-function getCurrentTime() {
-    return new Date().getTime();
+function getCurrentTime(options) {
+    var timestamp = new Date().getTime();
+    if (options) {
+        var dateObj = {};
+        if (options.seconds) dataObj.seconds = parseInt(timestamp / 1000);
+        if (options.hours) dateObj.hours = parseInt(timestamp / 1000 / 60 / 3600);
+
+        return dateObj;
+    }
+    return timestamp;
 }

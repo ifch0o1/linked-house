@@ -32,7 +32,6 @@ function colorListGenerate(listStr, elementsStr) {
     return $list;
 }
 
-
 // Including tabs
 window.tabCount = 0;
 var tabs = [];
@@ -107,5 +106,16 @@ refreshFavoritesCount();
     slider.start(7);
 })();
 
-// TODO move settings varable in annonymous sunction.
+// Initialize forecast
+(function() {
+    Weather.getForecast(['forecast', 'conditions'], 'BG/sozopol', initForecastController);
+
+    function initForecastController(response) {
+        window.ForecastController = new ControllForecast(response);
+        window.ForecastController.render('C');
+    }
+})();
+
+
+// TODO move settings varable in annonymous function.
 var settings = new UserSettingsController();

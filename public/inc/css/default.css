@@ -15,6 +15,7 @@ body, html, header, aside, nav, footer, section {
     padding: 0;
     margin: 0;
     display: block;
+    list-style-type: none;
 }
 h1, h2, h3, h4, h5, h6, p, a {
     font-weight: normal;
@@ -661,8 +662,9 @@ a, a:hover {
     /*font-family: calibri;*/
     font-size: 14px;
     font-weight: bold;
-    color: #007470;
+    color: cadetblue;
     margin-top: 5px;
+    padding: 0 5px;
 }
 
 #forecast_today {
@@ -705,13 +707,44 @@ a, a:hover {
     font-family: trebuc;
     font-size: 12px;
     font-style: italic;
-    border-left: 1px solid #bbbbbb;
-    border-right: 1px solid #bbbbbb;
     color: #008ebd;
     cursor: pointer;
     margin-top: 10px;
 }
-
+#forecast_config_conteiner {
+    display: none;
+    position: absolute;
+    background-color: aliceblue;
+    padding: 10px;
+    width: 180px;
+    margin-left: -200px;
+    margin-top: -20px;
+}
+#forecast_city_list {
+    margin-top: 10px;
+    color: steelblue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+#forecast_city_list > li {
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+    padding: 5px 0;
+    border-bottom: 1px solid;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+#forecast_city_list > li:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+#forecast_city_input {
+    width: 160px;
+    height: 40px;
+    text-align: center;
+}
+#forecast_degree_config {
+    display: none;
+    margin-top: 10px;
+}
 #wunderground_logo {
     margin: 15px auto;
 }

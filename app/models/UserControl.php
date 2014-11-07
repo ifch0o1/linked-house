@@ -128,9 +128,7 @@ class UserControl extends User {
         if (isset($result[0])) {
             return true;
         } else {
-            
             // TODO - Log error.
-            
             return false;
         }
     }
@@ -138,9 +136,7 @@ class UserControl extends User {
     private function isEmailExist($email) {
         $result = DB::select('SELECT user_email FROM users WHERE user_email=?', array($email));
         if (isset($result[0])) {
-
             //TODO - Log error.
-
             return true;
         } else {
             return false;

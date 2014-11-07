@@ -22,6 +22,14 @@ class User {
             if (isset($result[0]->user_id)) {
                 $this->_userId = $result[0]->user_id;
             }
+            else {
+                //TODO
+                // Log - cannot find username in DB.
+            }
+        }
+        else {
+            //TODO
+            // throw error - cannot validate username or username isn't provided.
         }
     }
     

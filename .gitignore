@@ -12,3 +12,6 @@ public/*.log
 
 #DataBase local configuration ignore
 app/config/database.php
+
+#Igrone NetBeans project folder
+/nbproject

@@ -182,6 +182,13 @@ class HomeController extends Controller {
                 Session::put('config.slider', $_POST['value']);
                 echo Session::get('config.slider');
                 break;
+
+            case 'forecast-citylist':
+                $URIparams = urlencode($_POST['query']);
+                $query = 'http://autocomplete.wunderground.com/aq?query=' . $URIparams;
+                $result = file_get_contents($query);
+                echo($result);
+                break;
         }
     }
 }
