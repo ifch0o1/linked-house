@@ -451,6 +451,7 @@ var ContainerSlider = {
         if (!this.picPaths) { 
             throw new TypeError('Slider crashed [Arguments Error [expect paths as array]]');
         }
+        preloadImages(picPaths);
     },
     render: function(pathIndex) {
         pathIndex = pathIndex ? pathIndex : 0;

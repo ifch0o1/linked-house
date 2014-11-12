@@ -100,6 +100,9 @@
         right: 50;
         top: 125;
     }
+    #server-status-info > table > tbody > tr > td {
+        display: inline-block;
+    }
     #server-status-info > table > tbody > tr {
         font-family: "Trebuchet MS", Helvetica, sans-serif;
         font-weight: bold;
@@ -162,7 +165,7 @@
     <h1 id="login_heading_text">Login</h1>
     <br class="clearfix"/>
     <div id="login-table-wapper">
-        <form>
+        <form method="post">
             <p id="login-error-text"></p>
             <table id="login-table">
                 <tr>
@@ -175,7 +178,7 @@
                 </tr>
             </table>
             <span id="current-server-status-icon" class="server-status-icon server-waiting-icon"></span>
-            <button id="login-submit">Login</button>
+            <button type="button" id="login-submit">Login</button>
         </form>
     </div>
 </div>

@@ -353,12 +353,6 @@ function maxArrayNum(arr) {
     return Math.max.apply(null, arr);
 }
 
-var favoriteNavigation = {
-    update: function() {
-        //TODO
-    }
-}
-
 // Getting favorites count for current or specific tab.
 // This function uses html elements and attributes.
 // Cannot working correctly with different html structure.
@@ -408,6 +402,8 @@ function checkKeyCode(code) {
         case 13:
             return 'enter';
             break;
+        case 9:
+            return 'tab';
         default:
             return false;
     }
@@ -423,4 +419,23 @@ function getCurrentTime(options) {
         return dateObj;
     }
     return timestamp;
+}
+
+function preloadImages(array) {
+    if (!preloadImages.list) {
+        preloadImages.list = [];
+    }
+    for (var i = 0; i < array.length; i++) {
+        var img = new Image();
+        img.onload = function() {
+            var index = preloadImages.list.indexOf(this);
+            if (index !== -1) {
+                // remove this one from the array once it's loaded
+                // for memory consumption reasons
+                preloadImages.splice(index, 1);
+            }
+        }
+        preloadImages.list.push(img);
+        img.src = array[i];
+    }
 }

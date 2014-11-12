@@ -50,16 +50,19 @@ WriteSpeed.prototype.watch = function(inputElement) {
 			' expecting inputElement as jQuery object. ' + inputElement + ' given.');
 	}
 	var index = (this.inputElements.push(inputElement)) - 1;
-	var slef = this;
 
 	function worker(e) {
 		var code = e.keyCode || e.which;
 		if (checkKeyCode(code) == 'backspace') {
-			this.clear();
+			this.arrReference['lastChange'] = getCurrentTime();
 			return;
 		}
 		if (checkKeyCode(code) == 'enter') {
 			LogerController.login();
+			return;
+		}
+		if (checkKeyCode(code) == 'tab') {
+			return;
 		}
 
 		this.changeCounter++;
@@ -109,12 +112,12 @@ function Loger(nameInput, passInput) {
 	window.ws = new WriteSpeed([this.nameInput, this.passInput], this.arrReference);
 }
 Loger.prototype.checkArrReference = function() {
-	var ar = this.arrReference
+	var ar = this.arrReference;
 	if (ar['lowSpeedDetected'] || (this.failSubmits >= 3)) {
 		return 'disableAuto';
 	}
-	if (ar['speed'] /* &&  this.autoSubmiting */ && 
-	!($.isEmptyObject(ar['inputs'][0])) && !($.isEmptyObject(ar['inputs'][1]))) {
+	if (ar['speed']  &&  this.autoSubmiting  && 
+	(ar['inputs'][0].length > 2) && (ar['inputs'][1].length > 2)) {
 		if ((getCurrentTime() - ar['lastChange']) > ( ar['speed'] * 2 + 300)) {
 			return 'submit';
 		}
@@ -138,32 +141,39 @@ Loger.prototype.registerFail = function() {
 }
 
 var LogerController = {
+	reqInProgress: false,
 	loger: new Loger($('#name-input'), $('#password-input')),
 
 	init: function() {
+		this._fixBrowserAutocompleteBug($('#name-input'), $('#password-input'));
 		this._customIntervalChecking();
 	},
 	login: function() {
-		console.log('login submitted.');
+		if (this.reqInProgress === true) {
+			return;
+		}
 		LogerView.changeIcon('working');
 		var data = {
-			auto: '1',
 			username: $('#name-input').val(), 
 			password: $('#password-input').val(),
 		};
 		$.ajax({
 			type: 'POST',
 			data: data,
+			beforeSend: function() {
+				LogerController.reqInProgress = true;
+			},
 			success: function(response) {
 				switch (response) {
 					case 'accept':
-						console.log('accepted');
 						LogerView.changeIcon('accept');
 						setTimeout(function(){window.location.reload()}, 350);
 						break;
 					case 'deny':
 						LogerView.changeIcon('deny');
-						LogerController.loger.registerFail()
+						if (LogerController.loger.registerFail() < 2) {
+							LogerController.enableAutoSubmit();
+						}
 						setTimeout(function(){LogerView.changeIcon('waiting')}, 3000);
 						break;
 					case 'error':
@@ -180,12 +190,19 @@ var LogerController = {
 			error: function() {
 				// TODO redirect user to error page with error content
 				// Options for feedback
+			},
+			complete: function() {
+				LogerController.reqInProgress = false;
 			}
 		});
 	},
 	disableAutoSubmit: function() {
 		LogerController.loger.disableAutoSubmit();
 		LogerView.showButton();
+	},
+	enableAutoSubmit: function() {
+		LogerController.loger.enableAutoSubmit();
+		LogerView.hideButton();
 	},
 	_customIntervalChecking: function() {
 		check();
@@ -208,6 +225,18 @@ var LogerController = {
 			}
 			setTimeout(check, speed);
 		};
+	},
+	_fixBrowserAutocompleteBug: function(nameInput, passInput) {
+		if (nameInput.val()) {
+			LogerController.loger.arrReference['inputs'][0] = [300, 300, 300];
+		}
+		if (passInput.val()) {
+			LogerController.loger.arrReference['inputs'][1] = [600, 600, 600];
+		}
+		if (nameInput.val() && passInput.val()) {
+			LogerController.loger.arrReference['speed'] = 999;
+			LogerController.loger.arrReference['lastChange'] = getCurrentTime();
+		}
 	}
 }
 
