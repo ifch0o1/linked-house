@@ -208,6 +208,7 @@ include __DIR__ . '/inc/header.php';
 <div id="shower"></div>
 <script type="text/javascript" src="inc/js/functions.js"></script>
 <script type="text/javascript" src="inc/js/classes.js"></script>
+<script type="text/javascript" src="inc/js/modules.js"></script>
 <script type="text/javascript" src="inc/js/ev_functions.js"></script>
 <script type="text/javascript" src="inc/js/ev_handlers.js"></script>
 <script type="text/javascript" src="inc/js/widgets.js"></script>

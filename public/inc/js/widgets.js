@@ -25,7 +25,7 @@ var Weather = (function(){
 					callback(response);
 				},
 				error: function(){
-
+					// TODO
 				}
 			});
 		},
@@ -51,11 +51,10 @@ var ViewForecast = function(city) {
 			title: extractFileName(icon, true)
 		});
 
-		$today.find('.forecast_values').text(min + '-' + max + ' °C');
+		$today.find('.forecast_values').text(max + '-' + min + ' °C');
 	}
 	this.after1day = function (min, max, icon) {
 		var $thisDay = $forecastPlatform.children('.forecast_after').eq(0);
-
 		$thisDay.find('.forecast_day_text').text('Tomorrow');
 
 		$thisDay.find('img').attr({
@@ -64,7 +63,7 @@ var ViewForecast = function(city) {
 			title: extractFileName(icon, true)
 		});
 
-		$thisDay.find('.forecast_values').text(min + '-' + max + ' °C');
+		$thisDay.find('.forecast_values').text(max + '-' + min + ' °C');
 	}
 	this.after2day = function (min, max, icon, weekDay) {
 		var $thisDay = $forecastPlatform.children('.forecast_after').eq(1);
@@ -77,7 +76,7 @@ var ViewForecast = function(city) {
 			title: extractFileName(icon, true)
 		});
 
-		$thisDay.find('.forecast_values').text(min + '-' + max + ' °C');
+		$thisDay.find('.forecast_values').text(max + '-' + min + ' °C');
 	}
 	this.after3day = function (min, max, icon, weekDay) {
 		var $thisDay = $forecastPlatform.children('.forecast_after').eq(2);
@@ -90,7 +89,7 @@ var ViewForecast = function(city) {
 			title: extractFileName(icon, true)
 		});
 
-		$thisDay.find('.forecast_values').text(min + '-' + max + ' °C');
+		$thisDay.find('.forecast_values').text(max + '-' + min + ' °C');
 	}
 
 	this.render = function($parentElement) {
@@ -238,18 +237,12 @@ var ControllForecast = function(weatherObject) {
 		this.render(degreeFormat);
 	}
 
-	this.saveData = function(data) {
-		if (!data) {
-			throw new Error('forecastController.saveData() require data argument.');
+	this.setLocation = function(location) {
+		if (!location) {
+			throw new Error('forecastController.setLocation(location) expecting 1 argument as `string` location');
 		}
 
-		console.log('data will be sended to the server, for seving. The data will be displayed in next line.');
-		console.log(data);
-	}
-
-	// If no index is provided, getData() will return all the forecast data.
-	this.getData = function(index) {
-		console.log('you trying access the data at index: ' + index);
+		userConfig.set('forecast.location', location);
 	}
 }
 

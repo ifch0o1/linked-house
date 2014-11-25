@@ -89,6 +89,7 @@ refreshFavoritesCount();
 
 // Initialize slider
 (function() {
+
     var slider = Object.create(ContainerSlider);
     var paths = [
         'inc/img/slides/slide_1.png',
@@ -98,17 +99,34 @@ refreshFavoritesCount();
         'inc/img/slides/slide_5.png',
         'inc/img/slides/slide_6.png',
         'inc/img/slides/slide_7.png',
-        'inc/img/slides/slide_8.png'
+        'inc/img/slides/slide_8.png',
+        'inc/img/slides/slide_9.png',
+        'inc/img/slides/slide_10.png',
+        'inc/img/slides/slide_11.png',
+        'inc/img/slides/slide_12.png',
+        'inc/img/slides/slide_13.png',
+        'inc/img/slides/slide_14.png',
+        'inc/img/slides/slide_15.png',
+        'inc/img/slides/slide_16.png',
+        'inc/img/slides/slide_17.png',
+        'inc/img/slides/slide_18.png',
+        'inc/img/slides/slide_19.png',
+        'inc/img/slides/slide_20.png',
+        'inc/img/slides/slide_21.png',
+        'inc/img/slides/slide_22.png',
+        'inc/img/slides/slide_23.png'
     ];
 
     slider.init('580', '160', paths);
     slider.render();
-    slider.start(7);
+    slider.start(15);
 })();
 
 // Initialize forecast
 (function() {
-    Weather.getForecast(['forecast', 'conditions'], 'BG/sozopol', initForecastController);
+    userConfig.get('forecast.location', function(location) {
+        Weather.getForecast(['forecast', 'conditions'], location, initForecastController);
+    }, false);
 
     function initForecastController(response) {
         window.ForecastController = new ControllForecast(response);

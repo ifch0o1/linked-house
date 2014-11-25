@@ -18,8 +18,8 @@ function bindForecastConfig() {
     window.bindForecastSuggestions = function() {
         $('.city_suggestion').on('click', function() {
             var data = _elementDataToJSON($(this));
-            window.ForecastController.saveData(data);
             var location = data.lat + ',' + data.lon;
+            window.ForecastController.setLocation(location);
             Weather.getForecast(['forecast', 'conditions'], location, function(response) {
                 window.ForecastController.rerender(response, 'C');
             });

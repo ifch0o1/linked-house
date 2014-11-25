@@ -451,10 +451,13 @@ var ContainerSlider = {
         if (!this.picPaths) { 
             throw new TypeError('Slider crashed [Arguments Error [expect paths as array]]');
         }
+
+        this.firstImg = getRandomInt(0, this.picPaths.length);
+
         preloadImages(picPaths);
     },
     render: function(pathIndex) {
-        pathIndex = pathIndex ? pathIndex : 0;
+        pathIndex = pathIndex ? pathIndex : this.firstImg;
 
         var content = null;
         if (pathIndex == this.picPaths.length - 1) {
@@ -469,7 +472,7 @@ var ContainerSlider = {
         $container.append(content);
     },
     start: function(intervalSec) {
-        var pathIndex = 0;
+        var pathIndex = this.firstImg;
         self = this;
 
         setInterval(function() {
@@ -585,6 +588,7 @@ var SliderFx = {
     },
 }
 
+// FInputTextEditor
 function InputTextEditor($el, value) {
     this.$el = $el;
     this.value = value ? value : '';
@@ -634,6 +638,7 @@ function InputTextEditor($el, value) {
     }
 }
 
+// FElementFx
 function ElementFx($element) {
     this.$element = $element;
     this._extraElement = null;
@@ -648,7 +653,6 @@ function ElementFx($element) {
             'top': '0',
             'left': '0',
             'background-color': 'rgba(10, 10, 10, 0.7)',
-            //TODO fix width and height. [scrolled document]
             'width': '100%',
             'height': $(document).height()
         });

@@ -1,0 +1,86 @@
+tr {
+	display: table-row;
+}
+td {
+	display: table-cell;
+}
+table {
+	display: table;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.header-btn {
+    margin: 20px 10px;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    float:left;
+    height: 20px;
+    width: 90px;
+    background-color: #666666;
+}
+#register-btn {
+    margin-left: 120px;
+    color: #66cc66;
+}
+#login-btn {
+    color: #6699cc;
+}
+
+#registration_heading_text {
+	font-family: trebuc;
+	margin-top: 60px;
+	width: 560px;
+}
+#reg-icon {
+	position: absolute;
+	top: -88px;
+	right: -31px;
+}
+
+
+#registration_wapper {
+	position: relative;
+	margin-top: 20px;
+	padding: 10px 0 10px 0;
+	width: 560px;
+	text-align: center;
+	background-color: #ffcb18;
+	box-shadow: 0px 6px 9px -11px;
+}
+.reg_table {
+	margin: 0 20px 0;
+	font-size: 16px;
+	border-collapse: separate;
+    border-spacing: 19px 23px;
+}
+.reg_table tr input {
+	text-align: center;
+	padding: 0 10px;
+	border: none;
+	height: 40px;
+	width: 260px;
+	box-shadow: 0px 6px 9px -9px;
+	-webkit-transform: scale(0.9, 0.9);
+	transform: scale(0.9, 0.9);
+	-webkit-transition: box-shadow 0.4s, -webkit-transform 0.4s;
+	transition: box-shadow 0.4s, transform 0.4s;
+}
+.reg_table tr input:focus {
+	box-shadow: 0px 6px 30px -9px;
+	-webkit-transform: scale(1, 1);
+	transform: scale(1, 1);
+}
+
+#activation-note {
+	width: 420px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #2F2F2F;
+}

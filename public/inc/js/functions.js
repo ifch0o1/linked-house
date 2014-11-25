@@ -152,10 +152,6 @@ function extractFileName(path, cutExtension) {
     return fileName;
 }
 
-function findFilePaths(path) {
-    //TODO
-}
-
 function createFavoritesWapper(tab) {
     if (typeof tab !== 'number') {
         throw new TypeError('createFavoritesWapper(): Expecting only one argument as number (tab id)');
@@ -432,10 +428,14 @@ function preloadImages(array) {
             if (index !== -1) {
                 // remove this one from the array once it's loaded
                 // for memory consumption reasons
-                preloadImages.splice(index, 1);
+                preloadImages.list.splice(index, 1);
             }
         }
         preloadImages.list.push(img);
         img.src = array[i];
     }
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

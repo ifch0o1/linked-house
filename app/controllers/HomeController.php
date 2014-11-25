@@ -72,12 +72,11 @@ class HomeController extends Controller {
                         255, '#/\\<>\'`\"');
                     $validatedData = $validator->validate();
                     $newName = $validatedData['newName'];
-                    //// UPDATE DATABASE
-                    //TODO
-                    //// WITH SQL QUERY.
-
-                    //TODO
-                    //// Check if this user actually owns this favorite.
+                    // TODO
+                    // Next lines renaming the favorite
+                    // But favorite Class have own rename function
+                    // Fix renaming by using the fav class function.
+                    
                     if (DB::update('UPDATE favorites SET name=? WHERE fav_rec_id=?', 
                     array($newName, $favId))) {
                         echo 'success';
@@ -178,16 +177,35 @@ class HomeController extends Controller {
                 }
                 break;
 
-            case 'slider_disabled':
-                Session::put('config.slider', $_POST['value']);
-                echo Session::get('config.slider');
-                break;
-
             case 'forecast-citylist':
                 $URIparams = urlencode($_POST['query']);
                 $query = 'http://autocomplete.wunderground.com/aq?query=' . $URIparams;
                 $result = file_get_contents($query);
                 echo($result);
+                break;
+
+            case 'user-config':
+                $config = new UserConfig($user->getUsername());
+                if ($_POST['action'] == 'set') {
+                    if (!isset($_POST['index'])) {
+                        App::abort(500, 'User config server error. Set config->[index] is not provided.');
+                    }
+                    if (!isset($_POST['value'])) {
+                        App::abort(500, 'User config server error. Cannot set undefined value to [index],');
+                    }
+
+                    $config->setData($_POST['index'], $_POST['value']);
+
+                } else if ($_POST['action'] == 'get') {
+                    if (!isset($_POST['index'])) {
+                        App::abort(500, 'User config server error. Get config->[index] is not provided.');
+                    }
+
+                    $value = $config->getData($_POST['index']);
+                    return Response::json($value);
+                } else {
+                    App::abort(500, 'User config server error. Cannot operate.');
+                }
                 break;
         }
     }

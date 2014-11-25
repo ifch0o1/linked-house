@@ -54,6 +54,7 @@ WriteSpeed.prototype.watch = function(inputElement) {
 	function worker(e) {
 		var code = e.keyCode || e.which;
 		if (checkKeyCode(code) == 'backspace') {
+			this.arrReference['inputs'][index] = [400, 400];
 			this.arrReference['lastChange'] = getCurrentTime();
 			return;
 		}
@@ -174,6 +175,8 @@ var LogerController = {
 						if (LogerController.loger.registerFail() < 2) {
 							LogerController.enableAutoSubmit();
 						}
+						LogerController.clearPassField();
+						LogerController._fixBrowserAutocompleteBug($('#name-input'), $('#password-input'));
 						setTimeout(function(){LogerView.changeIcon('waiting')}, 3000);
 						break;
 					case 'error':
@@ -203,6 +206,9 @@ var LogerController = {
 	enableAutoSubmit: function() {
 		LogerController.loger.enableAutoSubmit();
 		LogerView.hideButton();
+	},
+	clearPassField: function() {
+		$('#password-input').val('');
 	},
 	_customIntervalChecking: function() {
 		check();
