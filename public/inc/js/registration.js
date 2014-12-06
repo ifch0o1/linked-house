@@ -114,6 +114,7 @@
 				var statusSpan = this._getStatusEl($input);
 				statusSpan.removeClass('field_status_deny');
 				statusSpan.removeClass('field_status_accept');
+				statusSpan.removeAttr('_title');
 			},
 			accept: function($input, message) {
 				var statusSpan = this._getStatusEl($input);
