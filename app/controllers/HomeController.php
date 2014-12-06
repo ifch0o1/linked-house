@@ -137,18 +137,10 @@ class HomeController extends Controller {
                     $valData = $validator->validate();
                     if (!$valData) { exit; }
                 }
-
-                function getMaxTabId() {
-                    $result = DB::select('SELECT MAX(tab_id) AS id FROM tabs');
-                    return $result[0]->id;
-                }
-                $id = getMaxTabId() + 1;
-                $name = $valData['name'];
-                if (DB::insert('INSERT INTO tabs(user_id, tab_name, tab_id) VALUES (?, ?, ?)', 
-                array($user->getUserId(), $name, $id))) {
-                    $data = ['id' => $id, 'name' => $name];
-                    echo json_encode($data);
-                }
+                $newTabId = Tab::add($valData['name'], $user->getUserId);
+                
+                $data = ['id' => $newTabId, 'name' => $valData['name']];
+                echo json_encode($data);
                 break;
 
             case 'get_user_favorites':

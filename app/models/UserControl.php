@@ -36,6 +36,7 @@ class UserControl extends User {
 
     public function setEmail($email) { 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            //TODO return View::make(errorPage with params)
             echo '<b>PHP error:</b><br/>'
             . ' \'[Control] User: email validation error!\'<br/>'
             . 'Please contact site administrator!';
@@ -110,8 +111,8 @@ class UserControl extends User {
             DB::insert('INSERT INTO users(user_name, user_password, user_email) '
                     . 'VALUES (?, ?, ?) ', array($this->username, $passwordHash, $this->email));
             $this->setUsername($this->username); // Refresh _userId in `this`
-            $this->insertDefaultTab();
-            $this->insertDefaultFavorites();
+            $tabId = $this->insertDefaultTab();
+            $this->insertDefaultFavorites($tabId);
 
             return true;
         } else {
@@ -143,29 +144,34 @@ class UserControl extends User {
         }
     }
 
-    private function insertDefaultFavorites() {
+    private function insertDefaultFavorites($tabId) {
         $defaultFav = new UserFavorite($this->username);
         $defaultFavorites = array(
-            array('tabId' => 0, 'favName' => 'Google', 'favUrl' => 'https://www.google.com',
+            array('tabId' => $tabId, 'favName' => 'Google', 'favUrl' => 'https://www.google.com',
                 'favPosition' => 1, 'favComment' => 'Google search engine.', 'favColor' => 1)
             // NEXT FAVORITE - > array(),
         );
 
         $index = 0;
-        foreach ($defaultFavorites as $key => $value) {
-            $defaultFav->setTabId($defaultFavorites[$index]['tabId']);
-            $defaultFav->setFavName($defaultFavorites[$index]['favName']);
-            $defaultFav->setFavUrl($defaultFavorites[$index]['favUrl']);
-            $defaultFav->setFavPosition($defaultFavorites[$index]['favPosition]']);
-            $defaultFav->setFavComment($defaultFavorites[$index]['favComment']);
-            $defaultFav->setFavColor($defaultFavorites[$index]['favColor']);
-            $defaultFav->add();
+        foreach ($defaultFavorites as $favData) {
+            $defaultFav->setTabId($favData['tabId']);
+            $defaultFav->setFavName($favData['favName']);
+            $defaultFav->setFavUrl($favData['favUrl']);
+            $defaultFav->setFavPosition($favData['favPosition']);
+            $defaultFav->setFavComment($favData['favComment']);
+            $defaultFav->setFavColor($favData['favColor']);
+            if (!$defaultFav->add()) {
+                echo 'Cannot create default favorite.';
+            }
 
             $index++;
         }
     }
     private function insertDefaultTab() {
-        DB::insert('INSERT INTO tabs(user_id, tab_id, tab_name) 
-                VALUES (?, ?, ?)', array($this->_userId, 1, 'General'));
+        if (!isset($this->_userId)) {
+            die('Cannot insert tab. user id is not defined.');
+        }
+        $id = Tab::add('General', $this->_userId);
+        return $id;
     }
 }

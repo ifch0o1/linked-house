@@ -15,3 +15,6 @@ app/config/database.php
 
 #Igrone NetBeans project folder
 /nbproject
+
+#Ignore local users folder.
+/app/storage/users

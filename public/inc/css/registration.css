@@ -27,9 +27,11 @@ table {
 }
 #register-btn {
     margin-left: 120px;
-    color: #66cc66;
 }
-#login-btn {
+#register-btn a {
+	color: #66cc66;
+}
+#login-btn a {
     color: #6699cc;
 }
 
@@ -51,11 +53,18 @@ table {
 	padding: 10px 0 10px 0;
 	width: 560px;
 	text-align: center;
-	background-color: #ffcb18;
+	background-color: #B6DBFF;
 	box-shadow: 0px 6px 9px -11px;
 }
+#reg_error {
+	color: #E61414;
+	font-weight: bold;
+	margin-top: 15px;
+	width: 420px;
+}
+
 .reg_table {
-	margin: 0 20px 0;
+	margin: 5px 20px 0;
 	font-size: 16px;
 	border-collapse: separate;
     border-spacing: 19px 23px;
@@ -73,14 +82,73 @@ table {
 	transition: box-shadow 0.4s, transform 0.4s;
 }
 .reg_table tr input:focus {
-	box-shadow: 0px 6px 30px -9px;
+	box-shadow: 0px 6px 30px -10px;
 	-webkit-transform: scale(1, 1);
 	transform: scale(1, 1);
 }
 
 #activation-note {
+	margin-top: 10px;
 	width: 420px;
 	font-size: 12px;
 	font-weight: bold;
 	color: #2F2F2F;
+}
+
+#reg_submit {
+	border: medium none;
+	margin-top: 20px;
+	width: 180px;
+	height: 40px;
+	background-color: #69B0FF;
+	font-weight: bold;
+	font-family: trebuc;
+	cursor: pointer;
+	box-shadow: 0px 6px 9px -12px;
+	-webkit-transform: scale(0.9, 0.9);
+	transform: scale(0.9, 0.9);
+	-webkit-transition: box-shadow 0.4s, -webkit-transform 0.4s;
+	transition: box-shadow 0.4s, transform 0.4s;
+}
+#reg_submit:focus {
+	box-shadow: 0px 6px 30px -12px;
+	-webkit-transform: scale(1, 1);
+	transform: scale(1, 1);
+}
+.field_status {
+	width: 32px;
+	height: 32px;
+	position: relative;
+	-webkit-transform: scale(0.2);
+	transform: scale(0.2);
+	opacity: 0;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.field_status[_title]:hover::after {
+	content: attr(_title);
+	position: absolute;
+	left: 0;
+	top: 100%;
+	white-space: nowrap;
+	z-index: 20px;
+	padding: 5px 10px;
+}
+.field_status_accept {
+	background: url(/inc/img/reg-accept.png);
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	opacity: 1;
+}
+.field_status_accept[_title]::after {
+	background-color: rgba(11, 230, 30, 0.3);	
+}
+.field_status_deny {
+	background: url(/inc/img/reg-deny.png);
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	opacity: 1;
+}
+.field_status_deny[_title]::after {
+	background-color: rgba(230, 22, 30, 0.3);
 }

@@ -14,9 +14,11 @@
     }
     #register-btn {
         margin-left: 120px;
+    }
+    #register-btn a {
         color: #66cc66;
     }
-    #login-btn {
+    #login-btn a {
         color: #6699cc;
     }
     #login_wapper, #server-status-info, .login-note {
@@ -155,8 +157,12 @@
     </div>
 
     <div id="right_side_header">
-        <span class="header-btn" id="register-btn">Register</span>
-        <span class="header-btn" id="login-btn">Login</span>
+        <span class="header-btn" id="register-btn">
+                <a href="/register">Register</a>
+        </span>
+        <span class="header-btn" id="login-btn">
+            <a href="/login">Login</a>
+        </span>
     </div>
 </header>
 

@@ -122,6 +122,12 @@ include __DIR__ . '/inc/header.php';
         </dt>
         <dd class="show_widgets">Widget is not ready yet</dd>
     </dl>
+    <div id="fast_links_settings">
+        <span class="fl_active fast_link_setting_button" id="fast_links_new_tab"></span>
+        <span class="fast_link_setting_button" id="fast_links_new_map"></span>
+        <span class="fast_link_setting_button" id="fast_links_new_sap"></span>
+        <span class="fast_link_setting_button" id="fast_links_new_gap"></span>
+    </div>
 </aside>
 
 <section id="section">

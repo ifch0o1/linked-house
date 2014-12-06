@@ -179,6 +179,9 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
+		// Main aliases
+		'Tab'             => 'StaticClasses\Tab',
+
 	),
 
 );

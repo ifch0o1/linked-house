@@ -174,7 +174,7 @@ a, a:hover {
     height: 100%;
 }
 
-#app_name, #fast_links_def_list {
+#app_name {
     float: left;
 }
 
@@ -216,6 +216,47 @@ a, a:hover {
 .fast_link_holder:hover .fast_link_icon_holder {
     -webkit-transform: rotate(270deg);
     transform: rotate(270deg);
+}
+
+#fast_links_settings {
+    margin-top: 20px;
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.fast_link_setting_button {
+    width: 25px;
+    height: 25px;
+    background-color: #AAA;
+    display: inline-block;
+    margin-bottom: 10px;
+    opacity: 0.3;
+    cursor: pointer;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.fast_link_setting_button:nth-child(odd) {
+    float: right;
+}
+.fast_link_setting_button:nth-child(even) {
+    float: left;
+}
+.fast_link_setting_button:nth-child(odd):hover {
+    -webkit-transform: matrix(1.2, 0.02, -0.02, 1.2, 2, 0);
+    transform: matrix(1.2, 0.02, -0.02, 1.2, 2, 0);
+}
+.fast_link_setting_button:nth-child(even):hover {
+    -webkit-transform: matrix(1.2, -0.02, 0.02, 1.2, -2, 0);
+    transform: matrix(1.2, -0.02, 0.02, 1.2, -2, 0);
+}
+.fl_active {
+    background-color: #FFB400;
+    opacity: 0.3;
+}
+
+#fast_links_settings:hover .fast_link_setting_button {
+    opacity: 1;
 }
 
 /*              FAST LINKS SPRITE ICONS            */

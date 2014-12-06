@@ -19,14 +19,12 @@ class UserFavorite extends User {
     public function __construct($username, $tabId = null, $favName = null, $favUrl = null, 
             $favPosition = null, $favComment = null, $favColor = null) {
         parent::__construct($username);
-        $this->setTabId($tabId);
-        $this->setFavName($favName);
-        $this->setFavUrl($favUrl);
-        $this->setFavPosition($favPosition);
-        if ($favComment) {
-            $this->setFavComment($favComment); 
-        }
-        $this->setFavColor($favColor);
+        if ($tabId)         $this->setTabId($tabId);
+        if ($favName)       $this->setFavName($favName);
+        if ($favUrl)        $this->setFavUrl($favUrl);
+        if ($favPosition)   $this->setFavPosition($favPosition);
+        if ($favComment)    $this->setFavComment($favComment); 
+        if ($favColor)      $this->setFavColor($favColor);
     }
     
     //Setters
@@ -111,6 +109,7 @@ class UserFavorite extends User {
 
             return true;
         } else {
+            die('Cannot add favorite - missing favorite data.');
             return false;
         }
     }

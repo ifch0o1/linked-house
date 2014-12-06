@@ -51,7 +51,7 @@ var ViewForecast = function(city) {
 			title: extractFileName(icon, true)
 		});
 
-		$today.find('.forecast_values').text(max + '-' + min + ' °C');
+		$today.find('.forecast_values').text(max + ' | ' + min + ' °C');
 	}
 	this.after1day = function (min, max, icon) {
 		var $thisDay = $forecastPlatform.children('.forecast_after').eq(0);
@@ -63,7 +63,7 @@ var ViewForecast = function(city) {
 			title: extractFileName(icon, true)
 		});
 
-		$thisDay.find('.forecast_values').text(max + '-' + min + ' °C');
+		$thisDay.find('.forecast_values').text(max + ' | ' + min + ' °C');
 	}
 	this.after2day = function (min, max, icon, weekDay) {
 		var $thisDay = $forecastPlatform.children('.forecast_after').eq(1);
@@ -76,7 +76,7 @@ var ViewForecast = function(city) {
 			title: extractFileName(icon, true)
 		});
 
-		$thisDay.find('.forecast_values').text(max + '-' + min + ' °C');
+		$thisDay.find('.forecast_values').text(max + ' | ' + min + ' °C');
 	}
 	this.after3day = function (min, max, icon, weekDay) {
 		var $thisDay = $forecastPlatform.children('.forecast_after').eq(2);
@@ -89,7 +89,7 @@ var ViewForecast = function(city) {
 			title: extractFileName(icon, true)
 		});
 
-		$thisDay.find('.forecast_values').text(max + '-' + min + ' °C');
+		$thisDay.find('.forecast_values').text(max + ' | ' + min + ' °C');
 	}
 
 	this.render = function($parentElement) {

@@ -561,6 +561,7 @@ var SliderFx = {
     },
     render: function(speed) {
         var offset = this.width + 20;
+        console.log('$current slider image offset: ' + offset);
 
         // Current image animation
         this.$currentImage.css({

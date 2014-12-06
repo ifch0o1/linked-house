@@ -15,8 +15,12 @@
     </div>
 
     <div id="right_side_header">
-        <span class="header-btn" id="register-btn">Register</span>
-        <span class="header-btn" id="login-btn">Login</span>
+        <span class="header-btn" id="register-btn">
+                <a href="/register">Register</a>
+        </span>
+        <span class="header-btn" id="login-btn">
+            <a href="/login">Login</a>
+        </span>
     </div>
 </header>
 
@@ -26,41 +30,43 @@
 <div id="registration_wapper" class="center">
 
     <img id="reg-icon" src="inc/img/registration-icon.png">
-
+    <?php
+        if (isset($regError)) {
+            echo '<p id="reg_error" class="center">'.$regError.'</p>';
+        }
+    ?>
     <form method="POST">
         <table class="reg_table">
             <tr>
                 <td>Username</td>
-                <td><input type="text" name="username"/></td>
+                <td><input id="field_username" type="text" name="username" required /></td>
+                <td><span class="field_status"></span></td>
             </tr>
             <tr>
-                <td>
-                    Password
-                </td>
-                <td><input type="password" name="password" /></td>
+                <td>Password</td>
+                <td><input id="field_pass" type="password" name="password" required /></td>
+                <td><span class="field_status"></span></td>
             </tr>
             <tr>
-                <td>
-                    Password
-                </td>
-                <td><input type="password" name="password_confirm" /></td>
+                <td>Password</td>
+                <td><input id="field_re_pass" type="password" name="password_confirm" required /></td>
+                <td><span class="field_status"></span></td>
             </tr>
             <tr>
-                <td>
-                    Email address
-                </td>
-                <td><input type="text" name="email" /></td>
+                <td>Email address</td>
+                <td><input id="field_email" type="email" name="email" required /></td>
+                <td><span class="field_status"></span></td>
             </tr>
         </table>
         <p id="activation-note" class="center">
             <i>Note: </i> Email activation is not required, but is recommended.<br>
-            In case you forget your password, your email will be used to change it.
+            In case you forgot your password, your email will be used to renew it.
         </p>
 
-        <input type='submit' value="Register" />
+        <input id="reg_submit" type='submit' value="Register" />
     </form>
 </div>
-
+<script type="text/javascript" src="inc/js/jquery-1.11.1-uncompressed.js"></script>
 <script type="text/javascript" src="inc/js/registration.js"></script>
 
 

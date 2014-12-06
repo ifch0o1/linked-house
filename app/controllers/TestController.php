@@ -14,9 +14,17 @@ class TestController extends Controller {
         // START OPERATIONS HERE -->
 
 
-        $config = new UserConfig('glowhacker');
-        // $config->setData('global.slider', 'enabled');
-        $data = $config->getData('global.slider');
+        $data['exist'] = DB::table('users')->where('user_name', 'glowhacker')->first();
+        $data['free'] = DB::table('users')->where('user_name', 'kjqwgijas22')->first();
+        $data['issetfree'] = isset($data['free']);
+        $data['issetfreeDUMP'] = var_dump(isset($data['free']));
+
+        if ($data['issetfree']) {
+            $data['if_runned'] = 'TRYE';
+        }
+        else {
+            $data['if_runned'] = 'FALSE';
+        }
         
         
         // END OPERATIONS HERE ^^^
