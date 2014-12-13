@@ -4,7 +4,7 @@ class TestController extends Controller {
 
     private $data = array();
 
-    public function test() {
+    public function test($id = null) {
         $mic_time = microtime();
         $mic_time = explode(" ", $mic_time);
         $mic_time = $mic_time[1] + $mic_time[0];
@@ -13,19 +13,19 @@ class TestController extends Controller {
         
         // START OPERATIONS HERE -->
 
+        $data['res'] = DB::table('users')->where('user_id', null)->first();
 
-        $data['exist'] = DB::table('users')->where('user_name', 'glowhacker')->first();
-        $data['free'] = DB::table('users')->where('user_name', 'kjqwgijas22')->first();
-        $data['issetfree'] = isset($data['free']);
-        $data['issetfreeDUMP'] = var_dump(isset($data['free']));
+        $data['user_email'] = $data['res']->user_email;
 
-        if ($data['issetfree']) {
-            $data['if_runned'] = 'TRYE';
-        }
-        else {
-            $data['if_runned'] = 'FALSE';
-        }
-        
+
+
+        // $data['current'] = new DateTime('2014-12-11 00:12:12');
+        // $data['expires'] = new DateTime('2014-12-12 11:24:44');
+        // $data['interval'] = $data['current']->diff($data['expires']);
+        // $data['intervalFormat'] = $data['interval']->format('%H:%i:%s');
+        // $data['DateTimeNow'] = new DateTime(date("Y-m-d H:i:s"));
+
+        // $data['bigger'] = $data['current'] > $data['expires'];
         
         // END OPERATIONS HERE ^^^
         

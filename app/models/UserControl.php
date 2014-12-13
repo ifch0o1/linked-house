@@ -39,7 +39,7 @@ class UserControl extends User {
             //TODO return View::make(errorPage with params)
             echo '<b>PHP error:</b><br/>'
             . ' \'[Control] User: email validation error!\'<br/>'
-            . 'Please contact site administrator!';
+            . 'Please contact site administrator.';
             exit;
         }
 
@@ -110,9 +110,10 @@ class UserControl extends User {
 
             DB::insert('INSERT INTO users(user_name, user_password, user_email) '
                     . 'VALUES (?, ?, ?) ', array($this->username, $passwordHash, $this->email));
-            $this->setUsername($this->username); // Refresh _userId in `this`
+            $this->setUsername($this->username); // Refresh _userId in `this` object.
             $tabId = $this->insertDefaultTab();
             $this->insertDefaultFavorites($tabId);
+            EmailActivator::sendMail($this->_userId, $this->email);
 
             return true;
         } else {

@@ -17,7 +17,7 @@ Route::get('home', 'HomeController@showHome');
 
 Route::post('home', 'HomeController@postControll');
 
-Route::get('test', 'TestController@test');
+Route::get('test/{id?}', 'TestController@test');
 
 Route::get('login', 'LoginController@login');
 
@@ -27,3 +27,4 @@ Route::get('register', 'RegisterController@showForm');
 
 Route::post('register', 'RegisterController@register');
 
+Route::get('activation/{token}/{userId}', 'ActivationController@verify');

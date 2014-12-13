@@ -14,7 +14,7 @@ class RegisterController extends Controller {
     public function register() {
         if (isset($_POST['check']) && isset($_POST['value'])) {
             $result = $this->check($_POST['check'], $_POST['value']);
-            echo $result;
+            return Response::make($result)->header('Content-Type', 'text/plain');
             exit;
         }
 

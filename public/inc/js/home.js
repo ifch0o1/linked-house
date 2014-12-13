@@ -119,7 +119,7 @@ refreshFavoritesCount();
 
     slider.init('580', '160', paths);
     slider.render();
-    slider.start(15);
+    slider.start(30);
 })();
 
 // Initialize forecast

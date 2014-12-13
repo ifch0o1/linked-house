@@ -493,6 +493,10 @@ var ContainerSlider = {
         }, intervalSec * 1000);
     },
     _domConstructor: function(currentImage, nextImage) {
+        if (debug) {
+            console.log('Current Image: ' + currentImage);
+            console.log('Next Image: ' + nextImage);
+        }
         var currentImageFileName = extractFileName(currentImage, true);
         var nextImageFileName = extractFileName(nextImage, true);
 

@@ -219,5 +219,6 @@ include __DIR__ . '/inc/header.php';
 <script type="text/javascript" src="inc/js/ev_handlers.js"></script>
 <script type="text/javascript" src="inc/js/widgets.js"></script>
 <script type="text/javascript" src="inc/js/home.js"></script>
+<script type="text/javascript" src="inc/js/user-home-email-activation.js"></script>
 <?php
 include __DIR__ . '/inc/footer.php';
