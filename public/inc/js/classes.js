@@ -436,17 +436,13 @@ var Tab = {
         return $tabDiv;
     }
 }
-
-//IMPORTATNT!!!
-//
-// TODO for the slider : Load resources before rendering
-// or check if the image is loaded befor render next image.
-// or fix sliding to image that is not loaded yet.
+// FContainerSlider
 var ContainerSlider = {
     init: function(width, height, picPaths) {
         this.width = width | 0;
         this.height = height | 0;
         this.picPaths = $.isArray(picPaths) ? picPaths : false;
+        this._interval;
 
         if (!this.picPaths) { 
             throw new TypeError('Slider crashed [Arguments Error [expect paths as array]]');
@@ -457,7 +453,7 @@ var ContainerSlider = {
         preloadImages(picPaths);
     },
     render: function(pathIndex) {
-        pathIndex = pathIndex ? pathIndex : this.firstImg;
+        pathIndex = pathIndex === undefined ? this.firstImg : pathIndex;
 
         var content = null;
         if (pathIndex == this.picPaths.length - 1) {
@@ -472,10 +468,13 @@ var ContainerSlider = {
         $container.append(content);
     },
     start: function(intervalSec) {
+        if (this._interval) {
+            clearInterval(this._interval);
+        }
         var pathIndex = this.firstImg;
         self = this;
 
-        setInterval(function() {
+        this._interval = setInterval(function() {
             if (pathIndex >= self.picPaths.length) {
                 pathIndex = 0;
             }
@@ -492,11 +491,11 @@ var ContainerSlider = {
             pathIndex++;
         }, intervalSec * 1000);
     },
+    stop: function() {
+        clearInterval(this._interval);
+        $('#slider_wapper').empty();
+    },
     _domConstructor: function(currentImage, nextImage) {
-        if (debug) {
-            console.log('Current Image: ' + currentImage);
-            console.log('Next Image: ' + nextImage);
-        }
         var currentImageFileName = extractFileName(currentImage, true);
         var nextImageFileName = extractFileName(nextImage, true);
 
@@ -565,7 +564,6 @@ var SliderFx = {
     },
     render: function(speed) {
         var offset = this.width + 20;
-        console.log('$current slider image offset: ' + offset);
 
         // Current image animation
         this.$currentImage.css({
@@ -730,23 +728,12 @@ UserSettings.prototype.disableSlider = function(bool) {
     if (typeof bool != 'boolean') {
         throw new TypeError('Usersettings.disableSlider(bool) expecting argument as boolean type. ' + typeof bool + ' guven.');
     }
-
-    var data = {
-        type: 'slider_disabled',
-        value: bool
+    if (bool === true) {
+        userConfig.set('global.slider', 'disabled');
     }
-    $.ajax({
-        type: 'POST',
-        data: data,
-        success: function(response) {
-            // TODO
-        },
-        error: function(error) {
-            if (debug) {
-                console.log(error);
-            }
-        }
-    });
+    else {
+        userConfig.set('global.slider', 'enabled');   
+    }
 }
 UserSettings.prototype.clearAllLinks = function() {
     $.each(favoriteObjects, function(favoriteObj) {
@@ -789,9 +776,6 @@ UserSettingsView.prototype.hideQ = function() {
 UserSettingsView.prototype.qSubHeading = function(text) {
     this.qSubHeadingText.text(text);
 }
-UserSettingsView.prototype.hideSlider = function() {
-    this.slider.remove();
-}
 UserSettingsView.prototype.alert = function(text, color) {
     if (typeof text !== 'string') {
         throw new TypeError('UserSettingsView.alert(text) expecting argument as string! ' + typeof text + ' given.');
@@ -823,6 +807,7 @@ function UserSettingsController() {
     this.noButton = $('#us_q_answer_no');
     this.model = new UserSettings();
     this.view = new UserSettingsView();
+    this._slider;
 
     // This function will be referenced when user try to make any changes in setting that require confirm.
     // This function will be called when user answer with 'yes' to confirm question.
@@ -832,12 +817,26 @@ function UserSettingsController() {
     var that = this;
     this.yesButton.on('click', function() {
         that._confirmFunction();
+        that.view.hideQ();
+    });
+    this.noButton.on('click', function() {
+        that.clearChanges('password');
+        that.view.hideQ();
     });
 
     $('.us_password_input').on('keyup', function() {
         var isFieldsFilled = that._checkPasswordFields();
         if (isFieldsFilled) {
             that.ask('Changing password...', that.changePassword);
+        }
+    });
+
+    this.checkDisableSlider.on('click', function() {
+        if ($(this).prop('checked')) {
+            that.disableSlider(true);
+        }
+        else {
+            that.disableSlider(false);
         }
     });
 }
@@ -868,14 +867,23 @@ UserSettingsController.prototype.changePassword = function() {
             this.view.alert('Something crashed. Try again later.', 'red');
             break;
     }
+    this.clearChanges('password');
 }
+// disableSlider(bool) enabling slider if bool is `false`.
 UserSettingsController.prototype.disableSlider = function(bool) {
     if (typeof bool != 'boolean') {
         throw new TypeError('UsersettingsController.disableSlider(bool) expecting argument as boolean type. ' + typeof bool + ' guven.');
     }
 
     this.model.disableSlider(bool);
-    this.view.hideSlider();
+    if (bool === true) {
+        if (this._slider) {
+            this._slider.stop();
+        }
+    }
+    else {
+        this._initSlider(false, {width: '580', height: '160'}, 3);
+    }
 }
 UserSettingsController.prototype.ask = function(text, confirmFunction) {
     if (confirmFunction) {
@@ -922,4 +930,58 @@ UserSettingsController.prototype._checkPasswordFields = function() {
     else {
         return false;
     }
+}
+
+/*-----------------------------------------------------
+| _initSlider(paths, size, interval)
+|------------------------------------------------------
+| Params:
+|   paths: `array` : paths to the slides.
+|
+|   size: `json` | `array` :
+|     fields:
+|     {
+|       width: value,
+|       height: value  
+|     }
+|
+|   interval: `number`: seconds between slide switches.
+|   
+|------------------------------------------------------
+*/
+UserSettingsController.prototype._initSlider = function(paths, size, interval) {
+    if (!this._slider) {
+        this._slider = Object.create(ContainerSlider);
+    }
+    var paths = paths || [
+        'inc/img/slides/slide_1.png',
+        'inc/img/slides/slide_2.png',
+        'inc/img/slides/slide_3.png',
+        'inc/img/slides/slide_4.png',
+        'inc/img/slides/slide_5.png',
+        'inc/img/slides/slide_6.png',
+        'inc/img/slides/slide_7.png',
+        'inc/img/slides/slide_8.png',
+        'inc/img/slides/slide_9.png',
+        'inc/img/slides/slide_10.png',
+        'inc/img/slides/slide_11.png',
+        'inc/img/slides/slide_12.png',
+        'inc/img/slides/slide_13.png',
+        'inc/img/slides/slide_14.png',
+        'inc/img/slides/slide_15.png',
+        'inc/img/slides/slide_16.png',
+        'inc/img/slides/slide_17.png',
+        'inc/img/slides/slide_18.png',
+        'inc/img/slides/slide_19.png',
+        'inc/img/slides/slide_20.png',
+        'inc/img/slides/slide_21.png',
+        'inc/img/slides/slide_22.png',
+        'inc/img/slides/slide_23.png'
+    ];
+
+    this.checkDisableSlider.prop('disabled', true);
+    this._slider.init(size['width'], size['height'], paths);
+    this._slider.render();
+    this._slider.start(interval);
+    this.checkDisableSlider.prop('disabled', false);
 }

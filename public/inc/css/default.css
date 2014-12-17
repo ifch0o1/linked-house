@@ -879,6 +879,7 @@ a, a:hover {
 }
 #us_configuration_options > table > tbody > tr > td {
     color: white;
+    display: table-cell;
 }
 #us_global_options {
     display: block;
@@ -934,4 +935,12 @@ a, a:hover {
 }
 #us_q_answer_no {
     float: right;
+}
+
+#activation-resend-holder:hover {
+    opacity: 1 !important;
+    background-color: #AEAEAE !important;
+}
+#activation-resend-holder:hover > * {
+    display: block !important;
 }

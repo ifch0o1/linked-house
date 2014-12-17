@@ -12,10 +12,13 @@ class TestController extends Controller {
         
         
         // START OPERATIONS HERE -->
-
-        $data['res'] = DB::table('users')->where('user_id', null)->first();
-
-        $data['user_email'] = $data['res']->user_email;
+        $data['pub'] = public_path();
+        $data['res'] = glob(public_path() . '/inc/img/slides/*.{jpeg,png}', GLOB_BRACE);
+        $data['urls'] = [];
+        foreach ($data['res'] as $value) {
+            $path = strrpos($value, 'inc');
+            array_push($data['urls'], $path);
+        }
 
 
 
@@ -27,8 +30,7 @@ class TestController extends Controller {
 
         // $data['bigger'] = $data['current'] > $data['expires'];
         
-        // END OPERATIONS HERE ^^^
-        
+        // END OPERATIONS HERE ^^^ 
         
         $mic_time = microtime();
         $mic_time = explode(" ", $mic_time);

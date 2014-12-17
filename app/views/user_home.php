@@ -8,8 +8,8 @@ include __DIR__ . '/inc/header.php';
     var _phpUserData = <?php echo json_encode($data); ?>;
 </script>
 
+<!--        Load jQuery       -->
 <script type="text/javascript" src="inc/js/jquery-1.11.1-uncompressed.js"></script>
-<!--        Load jQuery ^      -->
 
 <header id="header">
     <div id="left_side_header">
@@ -24,7 +24,6 @@ include __DIR__ . '/inc/header.php';
     <div id="logo_holder">
         <span id="logo_house" title="House"></span>
     </div>
-
     <div id="right_side_header">
         <span id="user_home_text"><?= $user ?>'s home</span>
         <div id="user_settings_icon_holder">

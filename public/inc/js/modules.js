@@ -30,19 +30,59 @@ var userConfig = (function(){
 			index: index,
 			value: val
 		}, function(res, err) {
+			// TODO Important
+			// --Update cache whan set data.
+			// This must be implemented as soon as possible. Otherwise will result in many errors.
 			if (err) {
-				throw new Error(err);
+				if (debug) {
+					console.error(err);
+				}
+				console.error('Error occured when saving user settings.');
 			}
 		});
 	};
-	var getData = function userConfigGetData(index, callback, ignoreChache) {
-		if (ignoreChache || !cache) {
+
+	/*-------------------------------------------------------------------
+	| Function getData(index, callback, ignoreCache)
+	|--------------------------------------------------------------------
+	| Description: Get user settings value for an index.
+	| 
+	| NOTE: By default userConfig module cacheing the current settings.
+	|
+	| Params:
+	|   index: `string` index in user settings, seperated by dot '.'
+	|
+	|   callback: (optional) `function` function to be executed.
+	|     params: callback(response, error)
+	|     NOTE: If no callback provided, this function will return an promise object.
+	|
+	|   ignoreCache: (optional) `boolean` Ignoring cache.
+	|     Getting server value for the index.
+	|     
+	|--------------------------------------------------------------------
+	*/
+	var getData = function userConfigGetData(index, callback, ignoreCache) {
+		// If not callback, use promise.
+		if (!callback) {
+			var defer = $.Deferred();
+		}
+		if (ignoreCache || !cache) {
 			doAjax({
 				action: 'get',
 				index: index
 			}, function(res, err) {
+				// If callback is provided, execute the callback.
 				if (callback) {
 					callback(res, err);
+				}
+				// Else if callback is not provided, resolve or reject the promise.
+				else {
+					if (err) {
+						defer.reject(err);
+					}
+					else {
+						defer.resolve(res);
+					}
 				}
 			});
 		}
@@ -52,8 +92,13 @@ var userConfig = (function(){
 				callback(value);
 			}
 			else {
-				return getCacheValue(index);
+				defer.resolve(value);
+				return value;
 			}
+		}
+
+		if (defer) {
+			return defer.promise();
 		}
 	};
 

@@ -143,6 +143,12 @@ function checkPositiveInt(int, returnNewInt) {
 }
 
 function extractFileName(path, cutExtension) {
+    if (!path) {
+        var _error = new Error('extractFileName(path, cutEx) Error: path argument is not provided');
+        console.error(_error);
+        return;
+    }
+
     var fileName = getLastSplit('/', path);
 
     if (cutExtension) {

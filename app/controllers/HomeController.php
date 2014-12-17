@@ -35,6 +35,14 @@ class HomeController extends Controller {
         }
     }
 
+    /*-------------------------------------------------------------
+    | TODO - postControll()
+    |--------------------------------------------------------------
+    | 1. Refactoring - This function need refactoring.
+    |    * Too much switch cases for $_POST['type'] (type of the request)
+    |    * Some operations are out of closure and isn't used at all cases.
+    |--------------------------------------------------------------
+    */
     function postControll() {
         if (!isset($_POST['type'])) {
             exit;
@@ -198,6 +206,47 @@ class HomeController extends Controller {
                 } else {
                     App::abort(500, 'User config server error. Cannot operate.');
                 }
+                break;
+
+            case 'check-activation-state':
+                if (EmailActivator::isActivated($user->getUserId())) {
+                    return Response::make('activated', 200)->header('Content-Type', 'text/plain');
+                }
+                else {
+                    $result = EmailActivator::getTimeRemaining($user->getUserId());
+                    switch ($result) {
+                        case 'expired':
+                            return Response::make('expired', 200)->header('Content-Type', 'text/plain');
+                            break;
+
+                        default:
+                            return Response::make('pending', 200)->header('Content-Type', 'text/plain');
+                            break;
+                    }
+                }
+                break;
+
+            case 'resend-activation-email':
+                $user->setEmail($_POST['email']);
+                $user->saveEmail();
+                EmailActivator::sendMail($user->getUserId(), $user->getEmail());
+
+                return Response::make('success', 200)->header('Content-Type', 'text/plain');
+                break;
+
+            case 'check-email':
+                $result = DB::table('users')->where('user_email', $_POST['email'])->first();
+                if (isset($result)) {
+                    return 'exist';
+                }
+                else {
+                    return 'free';
+                }
+                break;
+
+            default:
+                return Response::make('Unexpected action', 500)->header('Content-Type', 'text/plain');
+                exit;
                 break;
         }
     }

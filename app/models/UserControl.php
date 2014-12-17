@@ -44,10 +44,35 @@ class UserControl extends User {
         }
 
         //TODO chenge below validatior with filter_var email.
-        $validator = new DataValidator(array('email' => $email), 45, ' #/\\<>\'\"');
+        $validator = new DataValidator(array('email' => $email), 90, ' #/\\<>\'\"');
         $validatedData = $validator->validate();
         if (!$validatedData) { exit; }
         $this->email = $validatedData['email'];
+    }
+
+    public function saveEmail() {
+        // Workaround
+        $temp = 'temp' . $this->_userId;
+        DB::table('users')->where('user_id', $this->_userId)->update(array('user_email' => $temp));
+        if ($this->isEmailExist($this->email)) {
+            App::abort('Emails dublicate', 500);
+        }
+        if (!isset($this->email)) {
+            App::abort('Cannot update user email. The email is not setted.', 500);
+        }
+        DB::table('users')->where('user_id', $this->_userId)->update(array('user_email' => $this->email));
+    }
+
+    public function getEmail() {
+        $email = null;
+        if (isset($this->email)) {
+            $email = $this->email;
+        }
+        else {
+            $result = DB::table('users')->where('user_id', $this->_userId)->first();
+            $email = $result->user_email;
+        }
+        return $email;
     }
 
     public function getPasswordHash() {
@@ -81,7 +106,7 @@ class UserControl extends User {
         return false;
     }
 
-    public function login() {    
+    public function login() {
         $result = DB::select('SELECT user_password FROM users WHERE user_id=?', array($this->_userId));
         if (!isset($result[0]->user_password)) {
             return false;

@@ -2,6 +2,9 @@
  * This script will working correctly only in /home route
  */
 
+// TODO move settings varable in annonymous function.
+var settings = new UserSettingsController();
+
 var colors = {
     yellow: '#c5b800',
     red: '#b70000',
@@ -89,37 +92,21 @@ refreshFavoritesCount();
 
 // Initialize slider
 (function() {
+    userConfig.get('global.slider')
+        .then(function(val) {
+            if (val === 'enabled') {
+                $('#disable_slider_checkbox').prop('checked', false);
+                settings.disableSlider(false);
+            }
+            else {
+                $('#disable_slider_checkbox').prop('checked', true);
+            }
+        }, function(err) {
+            // TODO
+            // Show user error.
+        });
 
-    var slider = Object.create(ContainerSlider);
-    var paths = [
-        'inc/img/slides/slide_1.png',
-        'inc/img/slides/slide_2.png',
-        'inc/img/slides/slide_3.png',
-        'inc/img/slides/slide_4.png',
-        'inc/img/slides/slide_5.png',
-        'inc/img/slides/slide_6.png',
-        'inc/img/slides/slide_7.png',
-        'inc/img/slides/slide_8.png',
-        'inc/img/slides/slide_9.png',
-        'inc/img/slides/slide_10.png',
-        'inc/img/slides/slide_11.png',
-        'inc/img/slides/slide_12.png',
-        'inc/img/slides/slide_13.png',
-        'inc/img/slides/slide_14.png',
-        'inc/img/slides/slide_15.png',
-        'inc/img/slides/slide_16.png',
-        'inc/img/slides/slide_17.png',
-        'inc/img/slides/slide_18.png',
-        'inc/img/slides/slide_19.png',
-        'inc/img/slides/slide_20.png',
-        'inc/img/slides/slide_21.png',
-        'inc/img/slides/slide_22.png',
-        'inc/img/slides/slide_23.png'
-    ];
-
-    slider.init('580', '160', paths);
-    slider.render();
-    slider.start(30);
+    
 })();
 
 // Initialize forecast
@@ -134,6 +121,10 @@ refreshFavoritesCount();
     }
 })();
 
-
-// TODO move settings varable in annonymous function.
-var settings = new UserSettingsController();
+// Temporary disable Lock link position because positions and/or setting is not implemented yet.
+(function() {
+    var cb = $('#lock_links_checkbox').prop('disabled', true);
+    cb.parent().parent()
+        .css('text-decoration', 'line-through')
+        .attr('title', 'It\'s not supported yet');
+}());

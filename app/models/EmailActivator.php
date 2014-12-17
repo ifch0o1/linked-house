@@ -60,7 +60,7 @@ class EmailActivator {
 		if (isset($userId)) self::$userId = $userId;
 		if (!isset(self::$userId)) App::abort(500, 'Server error - Cannot get remaining time from unknow userId');
 
-		$result = DB::table('email-activation')->where('used', 0)->get();
+		$result = DB::table('email-activation')->where('user_id', $userId)->where('used', 0)->get();
 		if (!isset($result[0]) || isset($result[1])) {
 			// We have not valid token stored.
 			// Or we have more than one valid tokens -> This is unexpected exception.
@@ -70,7 +70,7 @@ class EmailActivator {
 			$expires = new DateTime($result[0]->expires);
 			$now = new DateTime(date("Y-m-d H:i:s"));
 			if ($expires < $now) {
-				return false;
+				return 'expired';
 			}
 			else {
 				$diff = $expires->diff($now);
@@ -130,7 +130,7 @@ class EmailActivator {
 			return true;
 		}
 		else {
-			// Token is not owned by the user.
+			// Token is expired or is not owned by the user.
 			return false;
 		}
 	}
