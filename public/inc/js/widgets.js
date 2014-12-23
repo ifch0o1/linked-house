@@ -267,14 +267,23 @@ function WeatherConfiguration(weatherController, configDiv) {
 		.css('display', 'none');
 
 	this._handleCityInputEvent();
+
+	var that = this;
+	this._dom.input.on('keypress', function(e) {
+		var code = e.keyCode || e.which;
+		if (checkKeyCode(code) === 'escape') {
+			that.show(false);
+		}
+	});
 }
 WeatherConfiguration.prototype.show = function(value) {
 	var displayRule = value ? 'block' : 'none';
 	this._config.css('display', displayRule);
 	this._visible = !!value;
+	this._dom.input.focus();
 }
 WeatherConfiguration.prototype.isVisible = function() {
-	return this._visible;
+	this._config.is(':visible');
 }
 /*
 	WeatherConfiguration.getCityList(qStr, callback).

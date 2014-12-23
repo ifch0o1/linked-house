@@ -46,8 +46,6 @@
             <a href="<?= action('HomeController@showHome') ?>">Continue</a>
         </span>
     </div>
-
-
 </div>
 
 <section>

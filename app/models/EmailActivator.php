@@ -20,7 +20,7 @@ class EmailActivator {
 	}
 
 	/*-------------------------------
-	| sendMail function:
+	| function sendMail():
 	| -------------------------------
 	| If this function is called with any parameters,
 	| it will change the private fields in this class.
@@ -125,6 +125,8 @@ class EmailActivator {
 
 	public static function checkToken($token, $userId) {
 		$result = DB::table('email-activation')->where('user_id', $userId)->where('used', 0)->first();
+		if (!isset($result->token)) App::abort(500, 'EmailActivator not found a valid tokens');
+
 		if ($token == $result->token) {
 			// Token is owned by the user.
 			return true;

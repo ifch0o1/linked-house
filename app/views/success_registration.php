@@ -1,16 +1,72 @@
-<?php include __DIR__.'/inc/header.php'; ?>
-<div class="registration_wapper">
-    <h1 id="success_registration_heading_text">Registration complete</h1>
-    <p id="success_registration_text">
-        Wellcome, registration complete.<br/>
-        You can <a href="<?=action('LoginController@login'); ?>">login</a>
-        now.
-    </p>
-    
-    
+<?php include app_path().'/views/inc/header.php'; ?>
+<style type="text/css">
+    #user_home_text > a,
+    #general-content a {
+        color: #A3A4FF;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    section {
+        text-align: center;
+    }
+    #general-content {
+        margin-top: 40px;
+        font-family: trebuc;
+    }
+    #general-content h3 {
+        font-size: 22px;
+        padding: 15px;
+    }
+    #general-content p {
+        width: 700px;
+        margin: 0 auto;
+        padding: 10px;
+        background-color: #FFF;
+        border-top: 3px solid #00BD00;
+    }
+    a {
+    	display: inline-block !important;
+    }
+</style>
+<script type="text/javascript" src="/inc/js/jquery-1.11.1-uncompressed.js"></script>
+
+<div id="header">
+    <div id="left_side_header">
+        <h1 id="app_name">Linked House</h1>
+        <ul id="header_links_list">
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </div>
+
+    <div id="logo_holder">
+        <span id="logo_house" title="House"></span>
+    </div>
+
+    <div id="right_side_header">
+        <span id="user_home_text">
+            <a href="<?= action('HomeController@showHome') ?>">Continue</a>
+        </span>
+    </div>
+
+
 </div>
 
+<section>
+    <div id="general-content">
+        <h3>Registration successful.</h3>
+        <p>
+            You successfully registered at Linked House.<br><br>
+            <b>About email activation:</b><br>
+            Email activation is not required, <b>but</b> if you forgot your password, you can recover it only if your email is activated.
+            <br>
+            An email with instructions has beed sent to your email address (<?= $email ?>).
+            <br>
+            <br>
+            You can <a href="<?=action('LoginController@login'); ?>">login</a> now.
+        </p>
+    </div>
+</section>
 
-
-
-<?php include __DIR__.'/inc/footer.php';
+<?php include app_path().'/views/inc/footer.php'; ?>

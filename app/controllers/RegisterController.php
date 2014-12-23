@@ -27,12 +27,21 @@ class RegisterController extends Controller {
                       'regError' => 'Passwords do not match.'))->render();
             exit;
         }
+        if (!isset($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            return View::make('registration',
+                array('title' => 'Registration',
+                       'regError' => 'Email address is not valid.'))->render();
+            exit;
+        }
 
         $user = new UserControl($_POST['username'], $_POST['password'], $_POST['email']);
         $is_success = $user->register();
 
         if ($is_success) {
-            return View::make('success_registration', array('title' => 'Registration Success'))->render();
+            return View::make('success_registration', array(
+                'title' => 'Registration Success',
+                'email' => $_POST['email']
+                ))->render();
             exit;
         } else {
             return View::make('usererror', array('title' => 'Registration Error',

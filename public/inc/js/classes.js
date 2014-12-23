@@ -1,5 +1,5 @@
 /*
- * Comments like FTAB, FFAVORITE or anything else starting with F
+ * Comments like FSOME_CLASS_NAME or anything else starting with F
  * are writed for easy finding start position of the class (CTRL+F).
  * 
  * This file contains some classes and objects used in the application.
@@ -37,7 +37,7 @@ var Favorite = {
         this.name = name;
         this.url = url;
         this.position = position;
-        this.comment = comment;
+        this.comment = comment || 'No comment';
         this.color = color;
         this.id = id;
     },
@@ -63,7 +63,10 @@ var Favorite = {
                 window._responseFavId = id;
             },
             error: function(error) {
-                //TODO log
+                //TODO log, show user error.
+                if (degub) {
+                    console.error('Cannot add favorite, server error occured.');
+                }
             }
         });
 
@@ -308,10 +311,11 @@ var Tab = {
             error: function(error) {
                 window._responseTabId = null;
                 if (debug) {
-                    $('#shower').text(error);
+                    console.error(error);
                 }
             }
         });
+
         this.setTabId(window._responseTabId);
         tabs[this.tabId] = this;
         this.render();
@@ -349,6 +353,7 @@ var Tab = {
                     //TODO SHOW ERROR, LOG
                 }
             });
+
             $tabEl = $('#tab' + this.tabId);
             this.tabName = newName;
             $tabEl.find('.tab_name').text(this.tabName);
@@ -378,11 +383,12 @@ var Tab = {
                 //TODO Show error, log.
             }
         });
+
         $tabEl = $('#tab' + this.tabId);
         var prevTabId = this.getSiblingId();
         $tabEl.remove();
         window.tabCount--;
-        tabs.splice(this.tabId, 1);
+        tabs.splice(this.tabId, 1, null);
         selectTab(prevTabId);
     },
     getSiblingId: function() {
@@ -448,7 +454,7 @@ var ContainerSlider = {
             throw new TypeError('Slider crashed [Arguments Error [expect paths as array]]');
         }
 
-        this.firstImg = getRandomInt(0, this.picPaths.length);
+        this.firstImg = getRandomInt(0, this.picPaths.length - 1);
 
         preloadImages(picPaths);
     },
@@ -682,7 +688,8 @@ function ElementFx($element) {
             complete: function() {
                 $(this).css({
                     'z-index': '-99'
-                });
+                })
+                .remove();
             }
         });
 
@@ -882,7 +889,7 @@ UserSettingsController.prototype.disableSlider = function(bool) {
         }
     }
     else {
-        this._initSlider(false, {width: '580', height: '160'}, 3);
+        this._initSlider(false, {width: '580', height: '160'}, 25);
     }
 }
 UserSettingsController.prototype.ask = function(text, confirmFunction) {

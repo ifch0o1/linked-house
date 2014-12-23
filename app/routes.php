@@ -28,3 +28,7 @@ Route::get('register', 'RegisterController@showForm');
 Route::post('register', 'RegisterController@register');
 
 Route::get('activation/{token}/{userId}', 'ActivationController@verify');
+
+Route::get('password-recover/{token}/{userId}', 'PasswordRecoveryController@checkToken');
+
+Route::post('password-recover', 'PasswordRecoveryController@changePassword');

@@ -32,6 +32,7 @@ include __DIR__ . '/inc/header.php';
     </div>
 
     <div id="user_settings">
+        <a href="#" id="logout_button">Logout</a>
         <p id="us_alert"></p>
         <div id="us_change_password">
             <p id="us_change_password_text">Change password</p>
@@ -138,14 +139,14 @@ include __DIR__ . '/inc/header.php';
             </div>
         </div>
         
-        <div id="new_tab_button">
-            <span id="new_tab_icon" title="New tab"></span>
+        <div id="new_tab_button" class="new_tab_button">
+            <span id="new_tab_icon" title="New tab" class="new_tab_button"></span>
         </div>
         <div id="new_tab_form">
             <div id="tab_form_close" class="close_btn"></div>
             <p class="input_info"></p>
             <br class="clearfix"/>
-            <label for="new_tab_input">Name:</label><input id="new_tab_input" type="text" maxlength="18" />
+            <label for="new_tab_input">Name:</label><input id="new_tab_input" type="text" maxlength="10" />
             <button id="add_new_tab_button">Add</button>
         </div>
 

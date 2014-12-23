@@ -40,7 +40,7 @@ class HomeController extends Controller {
     |--------------------------------------------------------------
     | 1. Refactoring - This function need refactoring.
     |    * Too much switch cases for $_POST['type'] (type of the request)
-    |    * Some operations are out of closure and isn't used at all cases.
+    |    * Some operations are out of closure and isn't used at every case.
     |--------------------------------------------------------------
     */
     function postControll() {
@@ -65,6 +65,8 @@ class HomeController extends Controller {
 
             case 'remove_favorite':
                 $validatedId = filter_var($_POST['fav_id'], FILTER_VALIDATE_INT);
+                if (!$validatedId) exit;
+
                 if (DB::update('UPDATE favorites SET deleted=true WHERE fav_rec_id=?',
                     array($validatedId))) {
 
@@ -91,8 +93,8 @@ class HomeController extends Controller {
                     }
                 }
                 else {
-                    echo 'Error while renaming favorite ($_POST)';
-                    // TODO Show Error.
+                    echo 'Error while renaming favorite.';
+                    // TODO Log, Show error.
                 }
                 break;
 
@@ -100,7 +102,6 @@ class HomeController extends Controller {
                 if (isset($_POST['new_color']) && isset($_POST['fav_id'])) {
                     $validatedId = filter_var($_POST['fav_id'], FILTER_VALIDATE_INT);
                     // TODO validate $_POST['new_color'] !!!
-                    // TODO ^^^^^
                     $unvalidatedColor = $_POST['new_color'];
                     $success = DB::update('UPDATE favorites SET color=? WHERE fav_rec_id=?',
                         array($unvalidatedColor, $validatedId));
@@ -145,7 +146,7 @@ class HomeController extends Controller {
                     $valData = $validator->validate();
                     if (!$valData) { exit; }
                 }
-                $newTabId = Tab::add($valData['name'], $user->getUserId);
+                $newTabId = Tab::add($valData['name'], $user->getUserId());
                 
                 $data = ['id' => $newTabId, 'name' => $valData['name']];
                 echo json_encode($data);
@@ -246,7 +247,6 @@ class HomeController extends Controller {
 
             default:
                 return Response::make('Unexpected action', 500)->header('Content-Type', 'text/plain');
-                exit;
                 break;
         }
     }

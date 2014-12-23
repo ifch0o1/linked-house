@@ -317,10 +317,19 @@ a, a:hover {
 #new_tab_form {
     display: none;
     padding: 20px;
+    text-align: center;
     background-color: #33CC33;
     position: absolute;
     top: 40px;
     right: 0px;
+}
+#new_tab_form label, #new_tab_form input {
+    margin-top: 3px;
+    display: block;
+    text-align: center;
+}
+#new_tab_input {
+    height: 30px;
 }
 #new_tab_form.input_info {
     /*color*/
@@ -749,12 +758,12 @@ a, a:hover {
     font-style: italic;
     color: #008ebd;
     cursor: pointer;
-    margin-top: 10px;
+    margin: 10px 0;
 }
 #forecast_config_conteiner {
     display: none;
     position: absolute;
-    background-color: aliceblue;
+    background: url(/inc/img/moon-bg.jpg) aliceblue;
     padding: 10px;
     width: 180px;
     margin-left: -200px;
@@ -762,7 +771,7 @@ a, a:hover {
 }
 #forecast_city_list {
     margin-top: 10px;
-    color: steelblue;
+    color: #58D0FF;
     text-decoration: underline;
     cursor: pointer;
 }
@@ -774,7 +783,8 @@ a, a:hover {
     border-color: rgba(0, 0, 0, 0.1);
 }
 #forecast_city_list > li:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
 }
 #forecast_city_input {
     width: 160px;
@@ -820,11 +830,22 @@ a, a:hover {
     z-index: 8;
     padding: 0 10px;
 }
+#logout_button {
+    background-color: #F00;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 3px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-size: 11px;
+}
 #us_alert {
     height: 0px;
+    overflow: hidden;
     text-align: center;
-    -webkit-transform: height 0.3s;
-    transform: height 0.3s;
+    -webkit-transition: height 0.3s;
+    transition: height 0.3s;
 }
 #us_change_password {
     width: 190px;

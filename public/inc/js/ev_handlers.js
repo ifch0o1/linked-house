@@ -15,6 +15,7 @@ function bindForecastConfig() {
         }
         configInstance.show(!configInstance.isVisible());
     });
+
     window.bindForecastSuggestions = function() {
         $('.city_suggestion').on('click', function() {
             var data = _elementDataToJSON($(this));
@@ -39,17 +40,38 @@ function bindForecastConfig() {
     DOM Ready events
 */
 $(document).ready(function() {
+    /*
+    | Closing most of the elements, configs, settings forms etc.
+    | when click event is triggered outside of these elements.
+    */
+    $(document).click(function(event) {
+        if(!$(event.target).closest('#new_tab_form').length && !$(event.target).is('.new_tab_button')) {
+            if($('#new_tab_form').is(":visible")) {
+                window.TabForm.hide();
+            }
+        }
+        if(!$(event.target).closest('#forecast_config_conteiner').length && !$(event.target).is('#forecast_config')) {
+            if($('#forecast_config_conteiner').is(":visible")) {
+                $('#forecast_config_conteiner').hide();
+            }
+        }
+    });
+    /*
+        The code below is commended because is written long time ago.
+        It's seems to be not needed and will be deleted if the application
+        working correctly without it.
+    */
     // GETTING FAVORITE FORM INFORMATION
 
-    $('#fav_form_button').on('click', function() {
-        var data = getFavFormInformation();
-        var postData = {
-            type: 'save_favorite_information',
-            name: data.name,
-            url: data.url,
-            color: data.color
-        };
-    });
+    // $('#fav_form_button').on('click', function() {
+    //     var data = getFavFormInformation();
+    //     var postData = {
+    //         type: 'save_favorite_information',
+    //         name: data.name,
+    //         url: data.url,
+    //         color: data.color
+    //     };
+    // });
 
     // SELECTING TABS 
     function bindTabClick() {
@@ -85,7 +107,7 @@ $(document).ready(function() {
             $('#fav_form input').bind('keypress', function() {
                 setTimeout(function() {
                     var isValidName = inputController.checkInput($('#fav_form_name_input'), 24);
-                    if (!isValidName) {
+                    if (!isValidName || $('#fav_form_name_input').val().length < 3) {
                         inputController.stylizeWrongInput($('#fav_form_name_input'));
                     }
                     else {
@@ -101,7 +123,7 @@ $(document).ready(function() {
                     }
 
                     getFavInfoAndRenderExample();
-                }, 10);
+                }, 65);
             });
         },
         deactiveInputKeyPress: function() {
@@ -116,12 +138,12 @@ $(document).ready(function() {
 
     $('#fav_form_accept_button').on('click', function() {
         var fName = $('#fav_form_name_input').val();
-        var isValidName = inputController.checkInput($('#fav_form_name_input'), 24);
+        var isValidName = (inputController.checkInput($('#fav_form_name_input'), 24)) && (fName.length > 3);
 
         var fUrl = $('#fav_form_url_input').val();
         var isValidUrl = inputController.checkInput($('#fav_form_url_input'), 2048, true);
 
-        var positions = getFavoritePositions();
+        var positions = getFavoritePositions(); // This function is inside functions.js
         if (positions.length >= 1) {
             var lastPosition = maxArrayNum(positions);
             var fPosition = lastPosition + 1;
@@ -320,6 +342,7 @@ $(document).ready(function() {
         window.TabForm = {
             show: function() {
                 $form.slideDown();
+                $form.find('input').focus();
                 elFX.focus();
             },
             hide: function() {
@@ -331,17 +354,29 @@ $(document).ready(function() {
         
         var $close = $('#tab_form_close');
         $close.bind('click', window.TabForm.hide);
+        $('#new_tab_input').on('keyup', function(e) {
+            var code = e.keyCode || e.which,
+                keyName = checkKeyCode(code);
+
+            if (keyName === 'escape') {
+                window.TabForm.hide();
+            }
+            else if (keyName === 'enter') {
+                $('#add_new_tab_button').trigger('click');
+            }
+        });
     })();
 
     (function() {
         // Add button
 
         var addBtn = $('#add_new_tab_button').bind('click', function() {
+            window.TabForm.hide();
             var $input = $('#new_tab_input');
             var nameValue = $input.val();
             if (nameValue && nameValue.length >= 3) {
-                if (nameValue.length > 18) {
-                    var $info = $('#new_tab_form.input_info').text('Tab name cannot contain more than 18 symbols.');
+                if (nameValue.length > 10) {
+                    var $info = $('#new_tab_form.input_info').text('Tab name cannot contain more than 10 symbols.');
                     setTimeout(function() {
                         $info.text('');
                     }, 5000);
@@ -359,7 +394,7 @@ $(document).ready(function() {
 
     })();
 
-    window.developerLogout = function() {
+    $('#logout_button').on('click', function() {
         $.ajax({
             type: 'post',
             data: {type: 'logout'},
@@ -369,7 +404,7 @@ $(document).ready(function() {
                 }
             }
         });
-    }
+    });
 
     //User Settings
     $('#user_settings_button').unbind('click');

@@ -406,6 +406,10 @@ function checkKeyCode(code) {
             break;
         case 9:
             return 'tab';
+            break;
+        case 27:
+            return 'escape';
+            break;
         default:
             return false;
     }

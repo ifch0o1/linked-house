@@ -100,18 +100,26 @@ function showActiveTabFavorites(tabId) {
     $tabFavoriteWapper.css('display', 'inline-block');
 }
 
-function NewTabForm() {
-    var formObj = generateForm();
-    function generateForm() {
-        // TODO --
-        // Write form generation code
-        // Return JSON {content: ?, actionButton: ?, inputName: ?}
 
-        return {
-            content: content,
-            actionButton: actionButton,
-            inputName: inputName
-        }
-    }
-    return formObj;
-}
+
+/*
+    The commented code below is commended, cuz may be is writted before long time.
+    I think this is not needed and it's implemented somewhere else.
+    If the application didn't bug (don't need this function).
+    This will be deleted if everything is ok.
+*/
+// function NewTabForm() {
+//     var formObj = generateForm();
+//     function generateForm() {
+//         // TODO --
+//         // Write form generation code
+//         // Return JSON {content: ?, actionButton: ?, inputName: ?}
+
+//         return {
+//             content: content,
+//             actionButton: actionButton,
+//             inputName: inputName
+//         }
+//     }
+//     return formObj;
+// }

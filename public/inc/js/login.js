@@ -233,6 +233,10 @@ var LogerController = {
 		};
 	},
 	_fixBrowserAutocompleteBug: function(nameInput, passInput) {
+		if (nameInput.val() && passInput.val()) {
+			LogerView.showButton();
+			return;
+		}
 		if (nameInput.val()) {
 			LogerController.loger.arrReference['inputs'][0] = [300, 300, 300];
 		}
@@ -278,4 +282,6 @@ var LogerView = {
 
 $('#login-submit').bind('click', LogerController.login);
 
-LogerController.init();
+$(document).ready(function () {
+	LogerController.init();
+});

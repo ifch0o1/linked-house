@@ -12,13 +12,7 @@ class TestController extends Controller {
         
         
         // START OPERATIONS HERE -->
-        $data['pub'] = public_path();
-        $data['res'] = glob(public_path() . '/inc/img/slides/*.{jpeg,png}', GLOB_BRACE);
-        $data['urls'] = [];
-        foreach ($data['res'] as $value) {
-            $path = strrpos($value, 'inc');
-            array_push($data['urls'], $path);
-        }
+        return View::make('password-recovery.success', array('title' => 'Password Recovery [Linked House]', 'token' => 'asd314twef2f3', 'id' => 2));
 
 
 
