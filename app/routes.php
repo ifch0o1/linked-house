@@ -31,4 +31,11 @@ Route::get('activation/{token}/{userId}', 'ActivationController@verify');
 
 Route::get('password-recover/{token}/{userId}', 'PasswordRecoveryController@checkToken');
 
-Route::post('password-recover', 'PasswordRecoveryController@changePassword');
+Route::post('password-recover/{token}/{userId}', 'PasswordRecoveryController@changePassword');
+
+Route::post('request-password-recovery', function() {
+	if (isset($_POST['email'])) {
+		$isSent = PasswordRecovery::sendMail($_POST['email']);
+		return Response::make($isSent)->header('Content-Type', 'text/plain');
+	}
+});

@@ -12,8 +12,9 @@ class TestController extends Controller {
         
         
         // START OPERATIONS HERE -->
-        return View::make('password-recovery.success', array('title' => 'Password Recovery [Linked House]', 'token' => 'asd314twef2f3', 'id' => 2));
+        // return View::make('password-recovery.success', array('title' => 'Password Recovery [Linked House]', 'token' => 'asd314twef2f3', 'id' => 2));
 
+        $data['sent'] = PasswordRecovery::sendMail('ifch0o69@gmail.com');
 
 
         // $data['current'] = new DateTime('2014-12-11 00:12:12');

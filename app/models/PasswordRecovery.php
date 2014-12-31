@@ -4,7 +4,7 @@ class PasswordRecovery {
 
 	public static function sendMail($email) {
 		$userRow = self::checkEmail($email);
-		if ($userRow == false) {
+		if ($userRow == false || !$userRow->activated) {
 			return false;
 		}
 
@@ -16,6 +16,8 @@ class PasswordRecovery {
 		Mail::send('emails.auth.password-recovery', array('verifyLink' => $link), function($message) use ($email) {
 			$message->to($email)->subject('Password recovery [Linked House]');
 		});
+
+		return true;
 	}
 
 	/*----------------------------------------------------
@@ -51,6 +53,10 @@ class PasswordRecovery {
 		}
 	}
 
+	public static function clearTokens($userId) {
+		self::clearOldTokens($userId);
+	}
+
 	private static function generateToken($length = 60) {
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$charactersLength = strlen($characters);
@@ -75,13 +81,12 @@ class PasswordRecovery {
 
 	private static function checkForValidTokens($userId) {
 		$result = DB::table('password-recovery')->where('user_id', $userId)->where('used', 0)->first();
-		$expires = isset($result->expires) ? new DateTime($result->expires)) : false;
+		$expires = isset($result->expires) ? new DateTime($result->expires) : false;
 		if (!$expires) {
 			return false;
 		}
 		$now = new DateTime(date("Y-m-d H:i:s"));
-		$diff = $expires - $now;
-		if ($diff <= 0) {
+		if ($expires < $now) {
 			// An expired key found.
 			return false;
 		}

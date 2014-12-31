@@ -50,6 +50,12 @@
 		background-color: #FFB400;
 		color: black;
 	}
+	.accept {
+		color: green;
+	}
+	.deny {
+		color: red;
+	}
 </style>
 
 <script type="text/javascript" src="/inc/js/jquery-1.11.1-uncompressed.js"></script>
@@ -76,6 +82,7 @@
 </div>
 
 <div id="content-holder">
+	<p id="info"></p>
 	<h2>Password recovery</h2>
 	<p>Enter your new password below</p>
 	<form action="post">
@@ -96,19 +103,57 @@
 </div>
 
 <script type="text/javascript">
+	var viewPassword = {
+		_el: $('#info'),
+		message: function(text, isBad) {
+			this._el.removeClass('accept').removeClass('deny');
+			if (isBad) {
+				this._el.addClass('deny');
+			}
+			else {
+				this._el.addClass('deny');
+			}
+			this._el.text(text);
+		},
+		changed: function() {
+			this._el.removeClass('deny').addClass('accept');
+			this._el.text('Password changed successful.');
+		},
+		notMatch: function() {
+			this._el.removeClass('accept').addClass('deny');
+			this._el.text('Password do not match.');
+		},
+		hideButton: function() {
+			$('#submit-form').css('visibility', 'hidden');
+		}
+	}
+
 	$('#submit-form').on('click', function() {
 		if (!$('#new-password').val() || !$('#re-new-password').val()) {
 			return;
 		}
+		if ($('#new-password').val() !== $('#re-new-password').val()) {
+			viewPassword.notMatch();
+			return;
+		}
+		if ($('#new-password').val().length < 8) {
+			viewPassword.message('Min 8 symbols', true);
+		}
 
 		var data = {
-
+			'token': $('#state-token').val(),
+			'id': $('#state-user-id').val(),
+			'new-password': $('#new-password').val(),
+			're-new-password': $('#re-new-password').val()
 		}
 		$.ajax({
 			type: 'POST',
 			data: data,
-			success: function() {
-				
+			success: function(res) {
+				if (res == 'password-changed') {
+					viewPassword.changed();
+					viewPassword.hideButton();
+				}
 			}
 		});
 	});
