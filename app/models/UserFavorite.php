@@ -90,6 +90,7 @@ class UserFavorite extends User {
         $valId = filter_var($id, FILTER_VALIDATE_INT);
         if (!$valId) {exit;}
         
+        // Somethink is wrong there.
         $result = DB::select('SELECT * FROM favorites WHERE id = ?', array($id));
     }
 
