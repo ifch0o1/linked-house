@@ -125,7 +125,7 @@ class EmailActivator {
 
 	public static function checkToken($token, $userId) {
 		$result = DB::table('email-activation')->where('user_id', $userId)->where('used', 0)->first();
-		if (!isset($result->token)) App::abort(500, 'EmailActivator not found a valid tokens');
+		if (!isset($result->token)) App::abort(500, 'EmailActivator not found a valid token');
 
 		if ($token == $result->token) {
 			// Token is owned by the user.

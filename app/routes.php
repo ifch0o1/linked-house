@@ -36,6 +36,10 @@ Route::post('password-recover/{token}/{userId}', 'PasswordRecoveryController@cha
 Route::post('request-password-recovery', function() {
 	if (isset($_POST['email'])) {
 		$isSent = PasswordRecovery::sendMail($_POST['email']);
-		return Response::make($isSent)->header('Content-Type', 'text/plain');
+		$responseText = $isSent ? 'Sent' : 'Error! Check your typing.';
+		return Response::make($responseText)->header('Content-Type', 'text/plain');
+	}
+	else {
+		return Response::make('invalid-request')->header('Content-Type', 'text/plain');
 	}
 });

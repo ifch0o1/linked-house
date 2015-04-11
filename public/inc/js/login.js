@@ -255,6 +255,8 @@ var LogerView = {
 
 	showButton: function() {
 		$('#login-submit').show();
+		$('.pass-recovery-link').css('display', 'block');
+		$('.login-note').hide();
 	},
 	hideButton: function() {
 		$('#login-submit').hide();

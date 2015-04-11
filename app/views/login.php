@@ -138,6 +138,35 @@
         font-weight: bold;
         text-align: center;
     }
+    .pass-recovery-link {
+        display: none;
+        color: #4589FF;
+        margin-top: 20px;
+    }
+    .pass-recovery-link:hover {
+        color: blue;
+    }
+    .recovery-form-wrapper {
+        display: none;
+        background-color: #ABDB70;
+        padding: 10px 0;
+        top: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .recovery-form-wrapper h2 {
+        font-family: trebuc;
+        margin-bottom: 15px;
+    }
+    .recovery-form-wrapper input, .recovery-form-wrapper button {
+        margin: 2px;
+    }
+    .recovery-form-wrapper p {
+        margin-top: 10px;
+        font-family: trebuc;
+        color: #323320;
+    }
+
 </style>
 
 <script type="text/javascript" src="inc/js/jquery-1.11.1-uncompressed.js"></script>
@@ -185,6 +214,7 @@
             </table>
             <span id="current-server-status-icon" class="server-status-icon server-waiting-icon"></span>
             <button type="button" id="login-submit">Login</button>
+            <a href="#" class="pass-recovery-link">Password recovery</a>
         </form>
     </div>
 </div>
@@ -230,5 +260,6 @@
 
 <script type="text/javascript" src="inc/js/functions.js"></script>
 <script type="text/javascript" src="inc/js/login.js"></script>
+<script type="text/javascript" src="inc/js/password-recovery.js"></script>
 
 <?php include __DIR__.'/inc/footer.php' ?>

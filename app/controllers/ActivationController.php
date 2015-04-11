@@ -6,7 +6,6 @@ class ActivationController extends Controller {
 		// Check if the token is owned by the user and is valid.
 		if (!EmailActivator::checkToken($token, $userId)) {
 			return View::make('activation.error', array('title' => 'Activation error [1]'));
-			exit; // Just in case
 		}
 		else {
 			// If everything is right, activate the user.

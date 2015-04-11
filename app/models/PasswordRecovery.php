@@ -51,6 +51,9 @@ class PasswordRecovery {
 		if ($token == $validToken) {
 			return true;
 		}
+		else {
+			return false;
+		}
 	}
 
 	public static function clearTokens($userId) {

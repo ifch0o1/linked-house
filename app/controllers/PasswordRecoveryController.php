@@ -20,7 +20,7 @@ class PasswordRecoveryController extends Controller {
 		if (!isset($_POST['token']) || !isset($_POST['new-password'])
 			|| !isset($_POST['re-new-password']) || !isset($_POST['id'])
 			|| ($_POST['new-password'] != $_POST['re-new-password'])) {
-			// Show Error, log
+			return Response::make('invalid-data')->header('Content-Type', 'text/plain');
 		}
 		else if (PasswordRecovery::checkToken($_POST['token'], filter_var($_POST['id'], FILTER_VALIDATE_INT))) {
 			$userRow = DB::table('users')->where('user_id', $_POST['id'])->first();

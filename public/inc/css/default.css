@@ -219,6 +219,7 @@ a, a:hover {
 }
 
 #fast_links_settings {
+    display: none;
     margin-top: 20px;
     position: relative;
     width: 60px;
