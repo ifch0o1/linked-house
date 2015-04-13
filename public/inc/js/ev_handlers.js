@@ -56,22 +56,6 @@ $(document).ready(function() {
             }
         }
     });
-    /*
-        The code below is commended because is written long time ago.
-        It's seems to be not needed and will be deleted if the application
-        working correctly without it.
-    */
-    // GETTING FAVORITE FORM INFORMATION
-
-    // $('#fav_form_button').on('click', function() {
-    //     var data = getFavFormInformation();
-    //     var postData = {
-    //         type: 'save_favorite_information',
-    //         name: data.name,
-    //         url: data.url,
-    //         color: data.color
-    //     };
-    // });
 
     // SELECTING TABS 
     function bindTabClick() {
@@ -123,6 +107,12 @@ $(document).ready(function() {
                     }
 
                     getFavInfoAndRenderExample();
+
+                    if (!isValidName || !isValidUrl || $('#fav_form_name_input').val().length < 3) {
+                        $('#fav_form_accept_button_icon_holder').addClass('close-fav-form');
+                    } else {
+                        $('#fav_form_accept_button_icon_holder').removeClass('close-fav-form');
+                    }
                 }, 65);
             });
         },
@@ -137,10 +127,12 @@ $(document).ready(function() {
     }
 
     $('#fav_form_accept_button').on('click', function() {
-        var fName = $('#fav_form_name_input').val();
+        var fNameInput = $('#fav_form_name_input');
+        var fName = fNameInput.val();
         var isValidName = (inputController.checkInput($('#fav_form_name_input'), 24)) && (fName.length > 3);
 
-        var fUrl = $('#fav_form_url_input').val();
+        var fUrlInput = $('#fav_form_url_input');
+        var fUrl = fUrlInput.val();
         var isValidUrl = inputController.checkInput($('#fav_form_url_input'), 2048, true);
 
         var positions = getFavoritePositions(); // This function is inside functions.js
@@ -152,7 +144,8 @@ $(document).ready(function() {
             var fPosition = 1;
         }
 
-        var fComment = $('#fav_form_comment_input').val();
+        var fCommentInput = $('#fav_form_comment_input');
+        var fComment = fCommentInput.val();
         var isValidComment = inputController.checkInput($('#fav_form_comment_input'), 250);
 
         var fColor = getSelectedColor();
@@ -164,6 +157,10 @@ $(document).ready(function() {
             var favorite = Object.create(Favorite);
             favorite.init(fTab, fName, fUrl, fPosition, fComment, fColor);
             favorite.add();
+
+            fNameInput.val('');
+            fUrlInput.val('');
+            fCommentInput.val('');
         }
 
         var $form = $('#fav_form');
@@ -188,18 +185,16 @@ $(document).ready(function() {
     };
 
     // TODO refactor below function code.
-        function bindFavEditButtons() {
+    function bindFavEditButtons() {
+        var favId;
         $('.favorite_rename_button').unbind('click');
         $('.favorite_rename_button').bind('click', function() {
             var $favorite = $(this).parent().parent();
             var favoriteName = $favorite.find('.favorite_name').text();
-            var favId = getLastSplit('_', $favorite.attr('id'));
+            favId = getLastSplit('_', $favorite.attr('id'));
             var textEditor = new InputTextEditor($favorite, favoriteName);
             var nameEditor = textEditor.render();
             $(nameEditor.content).bind('keypress', function(e) {
-                //TODO 
-                //Algorithm for writing speed.
-
                 var code = e.keyCode || e.which;
                 if(code == 13) { //Enter pressed.
                     _rename();
@@ -219,7 +214,7 @@ $(document).ready(function() {
         $('.favorite_delete_button').bind('click', function() {
             var $favorite = $(this).parent().parent();
             var favoriteName = $favorite.find('.favorite_name').text();
-            var favId = getLastSplit('_', $favorite.attr('id'));
+            favId = getLastSplit('_', $favorite.attr('id'));
 
             var answer = confirm("Deleting favorite " + favoriteName + ". Are you sure?");
             if (answer == true) {
@@ -229,7 +224,7 @@ $(document).ready(function() {
         $('.favorite_color_change_button').unbind('click');
         $('.favorite_color_change_button').bind('click', function() {
             var $favorite = $(this).parent().parent();
-            var favId = getLastSplit('_', $favorite.attr('id'));
+            favId = getLastSplit('_', $favorite.attr('id'));
 
             var $colorList = $(this).parent().find('.favorite_color_list');
             $colorList.animate({width: 'toggle'});

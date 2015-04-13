@@ -9,17 +9,17 @@ JS/PHP
 4.----[OK]When logout and browser remember Username and Password, The autologin submitting and login.[OK]-----
 5.----[OK] Forecast Configuration styles + handeling [esc] button event + handeling outside click event.[OK]-----
 6.----[OK]Add New Tab Form styles + handeling [esc] button event + handeling outside click event.[OK]----
-7. Fav Form Accept button and Close Button or Deny Button implementation.
-8. WallpapersWide copyrighting. Make some logo or owner information.
-9. Fix mail pretended mode before uploading.
-0. Fix registration page input CSS transforming or disable it on old opera versions. + Check it on other browsers!
+7. ----[~OK] Fav Form Accept button and Close Button or Deny Button implementation.
+8. [?]WallpapersWide copyrighting. Make some logo or owner information.
+9. Fix mail pretended mode before deploying.
+0. Fix registration page input CSS transforming or disable it in old opera versions. + Check it on other browsers!
 -. Clear all favorites, Deactivate account (User settings) - implementation.
 -. Fix Favorite options state - "Select Color" animation visual bug.
 -. Registration at the server takes too long time. May be some SQL query or index issue. Check it, fix it...
 -. --[~~ OK] Password recovery.
 -. Registration error page styling (Don't confusing your life, Errors will be showed very few, or never).
--. Login page - Show/hide button - MUST REMOVE: NOTE text about autologin.
--. Registration form - disable submit button while not currect inputs. Or set minimum - maximum values (HTML5 style fixing)
+-. ----[OK] Login page - Showing button - MUST REMOVE: NOTE text about autologin.
+-. Registration form - disable submit button while not correct inputs. Or set minimum - maximum values (HTML5 style fixing)
 
 -. Pressing enter inside the login form or input - submits the form. Some times (when browser autocomplete is on), user can press enter to select an username. That makes a unnecessary submit.
 

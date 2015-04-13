@@ -343,9 +343,8 @@ var inputController = {
 function getFavoritePositions() {
     var positions = [];
 
-    var $favorites = $('#favorites_div > .favorite');
-    $.each($favorites, function(index, val) {
-        positions.push(val.attr('_position'));
+    $('.favorite').each(function() {
+        positions.push($(this).attr('_position'));
     });
 
     return positions;

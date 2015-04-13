@@ -105,8 +105,7 @@ var Favorite = {
     },
     
     changePosition: function() {
-        //TODO
-
+        //TODO -implement favorite positions.
     },
 
     changeColor: function(newColor) {
@@ -703,7 +702,7 @@ function ElementFx($element) {
 
 // FUserSettings
 function UserSettings() {
-    // TODO
+    
 }
 UserSettings.prototype.changePassword = function(oldPassword, newPassword) {
     if (!oldPassword || !newPassword) {
@@ -743,12 +742,11 @@ UserSettings.prototype.disableSlider = function(bool) {
     }
 }
 UserSettings.prototype.clearAllLinks = function() {
-    $.each(favoriteObjects, function(favoriteObj) {
-        if (favoriteObj) {
+    $.each(favoriteObjects, function(index, favoriteObj) {
+        if (favoriteObj && favoriteObj.remove) {
             favoriteObj.remove();
         }
     });
-    // TODO check if above function working correctly, think if better way existing.
 }
 UserSettings.prototype.lockLinkPositions = function() {
     return null;
@@ -845,6 +843,10 @@ function UserSettingsController() {
         else {
             that.disableSlider(false);
         }
+    });
+
+    this.clearLinksSpan.on('click', function() {
+        that.ask('Delete all favorite links?', that.model.clearAllLinks);
     });
 }
 UserSettingsController.prototype.openSettings = function() {

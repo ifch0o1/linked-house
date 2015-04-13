@@ -171,7 +171,6 @@ a, a:hover {
     display: inline-block;
     float: left;
     padding: 0 20px 0 40px;
-    height: 100%;
 }
 
 #app_name {
@@ -648,6 +647,10 @@ a, a:hover {
     background: url(/inc/img/accept_icon.png) -22px 0px no-repeat;
 }
 
+.close-fav-form {
+    background: url(/inc/img/close.png) no-repeat !important;
+}
+
 #containers_wapper {
     display: inline-block;
     width: 620px;
@@ -686,7 +689,6 @@ a, a:hover {
 #right_aside {
     display: inline-block;
     float: right;
-    height: 100%;
     padding: 20px 40px 20px 0px;
 }
 
@@ -919,6 +921,7 @@ a, a:hover {
     float: left;
 }
 #us_deactivate_account_option {
+    visibility: hidden;
     float: right;
 }
 
@@ -965,4 +968,12 @@ a, a:hover {
 }
 #activation-resend-holder:hover > * {
     display: block !important;
+}
+
+#footer {
+    background-color: #2F2F2F;
+    color: #B6B6B6;
+    padding: 10px;
+    text-align: center;
+    font-family: trebuc;
 }
