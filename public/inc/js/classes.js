@@ -771,13 +771,18 @@ UserSettingsView.prototype.hideSettings = function() {
     this.settings.slideUp(300);
 }
 UserSettingsView.prototype.showQ = function() {
-    // TODO fix bug with tapping settings button.
     this.q.height('120px');
 }
 UserSettingsView.prototype.hideQ = function() {
-    // TODO fix bug with tapping settings button.
     this.q.height('0px');
 }
+UserSettingsView.prototype.showWallpapersWideLink = function() {
+    $('.wallpaperswide_link').show().css('display', 'inline-block');
+}
+UserSettingsView.prototype.hideWallpapersWideLink = function() {
+    $('.wallpaperswide_link').hide();
+}
+
 UserSettingsView.prototype.qSubHeading = function(text) {
     this.qSubHeadingText.text(text);
 }
@@ -837,12 +842,8 @@ function UserSettingsController() {
     });
 
     this.checkDisableSlider.on('click', function() {
-        if ($(this).prop('checked')) {
-            that.disableSlider(true);
-        }
-        else {
-            that.disableSlider(false);
-        }
+        var boolAction = $(this).prop('checked') ? true : false;
+        that.disableSlider(boolAction);
     });
 
     this.clearLinksSpan.on('click', function() {
@@ -889,9 +890,11 @@ UserSettingsController.prototype.disableSlider = function(bool) {
         if (this._slider) {
             this._slider.stop();
         }
+        this.view.hideWallpapersWideLink();
     }
     else {
         this._initSlider(false, {width: '580', height: '160'}, 25);
+        this.view.showWallpapersWideLink();
     }
 }
 UserSettingsController.prototype.ask = function(text, confirmFunction) {
@@ -914,7 +917,7 @@ UserSettingsController.prototype.whenConfirm = function(fn) {
     this._confirmFunction = fn;
 }
 UserSettingsController.prototype.clearChanges = function(setting) {
-    var that = this; // varable `that` must be defined before inner function calls.
+    var that = this;
     switch(setting) {
         case 'password':
             clearPasswordFields();       

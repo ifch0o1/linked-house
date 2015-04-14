@@ -977,3 +977,18 @@ a, a:hover {
     text-align: center;
     font-family: trebuc;
 }
+
+.wallpaperswide_link {
+    display: none;
+    background-color: #DEDEDE;
+    z-index: 110;
+    margin: -14px 0px 0px 10px;
+    position: relative;
+    padding: 0px 10px;
+    color: #00B4E4;
+    font-style: italic;
+}
+.wallpaperswide_link:hover {
+    text-decoration: underline;
+    color: #00B4E4;
+}
