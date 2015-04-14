@@ -153,11 +153,15 @@ var LogerController = {
 		if (this.reqInProgress === true) {
 			return;
 		}
-		LogerView.changeIcon('working');
 		var data = {
 			username: $('#name-input').val(), 
 			password: $('#password-input').val(),
 		};
+		if (!data.username || !data.password) {
+			return;
+		}
+		
+		LogerView.changeIcon('working');
 		$.ajax({
 			type: 'POST',
 			data: data,
@@ -192,7 +196,7 @@ var LogerController = {
 			},
 			error: function() {
 				// TODO redirect user to error page with error content
-				// Options for feedback
+				// ?Optional feedback?
 			},
 			complete: function() {
 				LogerController.reqInProgress = false;
