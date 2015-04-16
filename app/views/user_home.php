@@ -9,7 +9,7 @@ include __DIR__ . '/inc/header.php';
 </script>
 
 <!--        Load jQuery       -->
-<script type="text/javascript" src="inc/js/jquery-1.11.1-uncompressed.js"></script>
+<script type="text/javascript" src="inc/js/jquery-1.10.2.min.js"></script>
 
 <header id="header">
     <div id="left_side_header">

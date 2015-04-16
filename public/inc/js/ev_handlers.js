@@ -363,12 +363,13 @@ $(document).ready(function() {
     })();
 
     (function() {
-        // Add button
+        // Add nwe tab button
 
         var addBtn = $('#add_new_tab_button').bind('click', function() {
             window.TabForm.hide();
             var $input = $('#new_tab_input');
             var nameValue = $input.val();
+            $input.val('');
             if (nameValue && nameValue.length >= 3) {
                 if (nameValue.length > 10) {
                     var $info = $('#new_tab_form.input_info').text('Tab name cannot contain more than 10 symbols.');
