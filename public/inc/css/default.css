@@ -47,6 +47,7 @@ a, a:hover {
     text-decoration: none;
 }
 .favorite_anchor:after {
+    visibility: hidden;
     content: attr(data-title);
     opacity: 0;
     position: absolute;
@@ -58,17 +59,24 @@ a, a:hover {
     font-style: normal;
     font-weight: bold;
     padding: 10px;
+    z-index: 50;
     white-space: nowrap;
 }
+.favorite_anchor.long-title:after {
+    white-space: normal;
+    width: 350px;
+}
 .favorite_anchor:after {
+    -moz-transition: opacity 0.2s;
     -webkit-transition: opacity 0.2s;
     transition: opacity 0.2s;
 }
 .favorite_anchor:hover,
 .favorite_anchor:focus {
-    /* Transition fix for CSS generated content */
+    /* CSS Generated content transition fix */
 }
 .favorite_anchor:hover:after {
+    visibility: visible;
     opacity: 1;
 }
 

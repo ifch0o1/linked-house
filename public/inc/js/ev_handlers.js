@@ -91,7 +91,7 @@ $(document).ready(function() {
             $('#fav_form input').bind('keypress', function() {
                 setTimeout(function() {
                     var isValidName = inputController.checkInput($('#fav_form_name_input'), 24);
-                    if (!isValidName || $('#fav_form_name_input').val().length < 3) {
+                    if (!isValidName || $('#fav_form_name_input').val().length <= 3) {
                         inputController.stylizeWrongInput($('#fav_form_name_input'));
                     }
                     else {

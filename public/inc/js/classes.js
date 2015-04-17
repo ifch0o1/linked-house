@@ -37,7 +37,7 @@ var Favorite = {
         this.name = name;
         this.url = url;
         this.position = position;
-        this.comment = comment || 'No comment';
+        this.comment = comment || 'No Comment';
         this.color = color;
         this.id = id;
     },
@@ -64,7 +64,7 @@ var Favorite = {
             },
             error: function(error) {
                 //TODO log, show user error.
-                if (degub) {
+                if (debug) {
                     console.error('Cannot add favorite, server error occured.');
                 }
             }
@@ -76,8 +76,6 @@ var Favorite = {
         bindFavoriteButtons();
         refreshFavoritesCount();
     },
-    
-    //Functions
 
     remove: function() {
         var data = {
@@ -144,7 +142,7 @@ var Favorite = {
             throw new Error('FavoriteEditor.rename(): expecting one argument. ' + arguments.length + ' given. Didn\'t accept null, undefined or false.');
         }
         
-        if (newName.length > 3) {
+        if (newName.length >= 3) {
             var data = {
                 type: 'rename_favorite',
                 tabId: selectTab().id,
@@ -182,7 +180,7 @@ var Favorite = {
     render: function() {
         $('#favorite_links_wapper_tab_' + this.tabId).append(this._domConstructor());
     },
-
+    
     getContent: function() {
         var content = this._domConstructor();
         return content;
@@ -212,6 +210,9 @@ var Favorite = {
             href: this.url,
             'data-title': this.comment
         });
+        if (this.comment.length > 60) {
+            $favoriteAnchor.addClass('long-title');
+        }
 
         var $favoriteAnchorText = $('<span>', {
             class: 'favorite_name'
