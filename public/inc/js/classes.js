@@ -208,7 +208,8 @@ var Favorite = {
         var $favoriteAnchor = $('<a>', {
             class: 'favorite_anchor',
             href: this.url,
-            'data-title': this.comment
+            target: '_blank',
+            'data-title': this.comment,
         });
         if (this.comment.length > 60) {
             $favoriteAnchor.addClass('long-title');

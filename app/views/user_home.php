@@ -82,35 +82,35 @@ include __DIR__ . '/inc/header.php';
     <dl id="fast_links_def_list">
         <dt class="facebook">
         <div class="fast_link_holder">
-            <a href="http://www.facebook.com" class="fast_link_icon_holder" id="facebook_icon"></a>
+            <a href="http://www.facebook.com" target="_blank" class="fast_link_icon_holder" id="facebook_icon"></a>
         </div>
         </dt>
         <dd class="facebook">Widget is not ready yet</dd>
 
         <dt class="twitter">
         <div class="fast_link_holder">
-            <a href="http://www.twitter.com" class="fast_link_icon_holder" id="twitter_icon"></a>
+            <a href="http://www.twitter.com" target="_blank" class="fast_link_icon_holder" id="twitter_icon"></a>
         </div>
         </dt>
         <dd class="twitter">Widget is not ready yet</dd>
 
         <dt class="youtube">
         <div class="fast_link_holder">
-            <a href="http://www.youtube.com" class="fast_link_icon_holder" id="youtube_icon"></a>
+            <a href="http://www.youtube.com" target="_blank" class="fast_link_icon_holder" id="youtube_icon"></a>
         </div>
         </dt>
         <dd class="youtube">Widget is not ready yet</dd>
 
         <dt class="google_mail">
         <div class="fast_link_holder">
-            <a href="http://www.gmail.com" class="fast_link_icon_holder" id="google_mail_icon"></a>
+            <a href="http://www.gmail.com" target="_blank" class="fast_link_icon_holder" id="google_mail_icon"></a>
         </div>
         </dt>
         <dd class="google_mail">Widget is not ready yet</dd>
 
         <dt class="blogger">
         <div class="fast_link_holder">
-            <a href="http://www.blogger.com" class="fast_link_icon_holder" id="blogger_icon"></a>
+            <a href="http://www.blogger.com" target="_blank" class="fast_link_icon_holder" id="blogger_icon"></a>
         </div>
         </dt>
         <dd class="blogger">Widget is not ready yet</dd>
