@@ -333,10 +333,12 @@ var inputController = {
         return true;
     },
     stylizeWrongInput: function($input) {
-        $input.css('background-color', '#ffbfbf');
+        $input.data('ic-old-border', $input.css('border'));
+        $input.css('border-right', '10px solid #FF6969');
     },
     UnstylizeInput: function($input) {
-        $input.removeAttr('style');
+        var border = $input.data('ic-old-border') || 'none';
+        $input.css('border', border);
     }
 }
 
@@ -410,7 +412,7 @@ function checkKeyCode(code) {
             return 'escape';
             break;
         default:
-            return false;
+            return 'unknown';
     }
 }
 

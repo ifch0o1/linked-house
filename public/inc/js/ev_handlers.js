@@ -84,14 +84,25 @@ $(document).ready(function() {
         FavFormEvent.activeColorClick();
     });
 
+    // Favorite form deactivation events
+    $('#fav_form_accept_button').on('click', function() {
+        FavFormEvent.deactiveInputKeyPress();
+    });
+
     // FAVORITE FORM KEYPRESS AND BUTTON
 
     var FavFormEvent = {
         activeInputKeyPress: function() {
-            $('#fav_form input').bind('keypress', function() {
+            $('#fav_form input').bind('keypress', function(e) {
+                var code = e.keyCode || e.which;
+                if (checkKeyCode(code) == 'enter') {
+                    $('#fav_form_accept_button').trigger('click');
+                    return;
+                }
+
                 setTimeout(function() {
                     var isValidName = inputController.checkInput($('#fav_form_name_input'), 24);
-                    if (!isValidName || $('#fav_form_name_input').val().length <= 3) {
+                    if (!isValidName || $('#fav_form_name_input').val().length < 3) {
                         inputController.stylizeWrongInput($('#fav_form_name_input'));
                     }
                     else {
@@ -115,6 +126,11 @@ $(document).ready(function() {
                     }
                 }, 65);
             });
+            // Trigger keypress event on all inputs
+            // clear rendered example and check inputs.
+            var e = $.Event('keypress');
+            e.keyCode = 9; // Tab key
+            $('#fav_form input').trigger(e);
         },
         deactiveInputKeyPress: function() {
             $('#fav_form input').unbind('keypress');
@@ -129,7 +145,7 @@ $(document).ready(function() {
     $('#fav_form_accept_button').on('click', function() {
         var fNameInput = $('#fav_form_name_input');
         var fName = fNameInput.val();
-        var isValidName = (inputController.checkInput($('#fav_form_name_input'), 24)) && (fName.length > 3);
+        var isValidName = (inputController.checkInput($('#fav_form_name_input'), 24)) && (fName.length >= 3);
 
         var fUrlInput = $('#fav_form_url_input');
         var fUrl = fUrlInput.val();

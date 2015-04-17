@@ -506,7 +506,8 @@ a, a:hover {
     width: 40px;
     height: 40px;
     margin: 0px 6px;
-    cursor: pointer; 
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 
@@ -548,14 +549,18 @@ a, a:hover {
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    left: 0;
-    right: 0;
+    left: 0px;
+    right: 0px;
     top: 10px;
     width: 560px;
-    background-color: #e1e6da;
+    background-color: #E1E6DA;
     z-index: 1;
+    border-bottom: 5px solid #0D2C00;
+    box-shadow: 0px 27px 40px;
 }
-
+#fav_form h2 {
+    font-family: trebuc;
+}
 #fav_form_table {
     width: 100%;
     margin: 0 auto;
@@ -658,6 +663,7 @@ a, a:hover {
 
 .close-fav-form {
     background: url(/inc/img/close.png) no-repeat !important;
+    margin: 2px 0 0 4px;
 }
 
 #containers_wapper {
