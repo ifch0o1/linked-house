@@ -63,7 +63,7 @@
             In case you forgot your password, your email will be used to renew it.
         </p>
 
-        <input id="reg_submit" type='submit' value="Register" />
+        <input id="reg_submit" type="submit" value="Register" />
     </form>
 </div>
 <script type="text/javascript" src="inc/js/jquery-1.11.1-uncompressed.js"></script>

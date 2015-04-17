@@ -35,8 +35,8 @@
 	| is too long string.
 	|-------------------------------------------------
 	*/
-	// TODO write a test for this function. Just in case.
-	var check = function(value, reqs) {
+	// TODO write unit tests for this function. Just in case.
+	function check(value, reqs) {
 		if (value && typeof value !== 'string') {
 			throw new TypeError('function chech(value, reqs) requires value parameter as `string`');
 		}
@@ -63,9 +63,9 @@
 	var remoteCheck = (function() {
 		/*-----------------------------------
 		|	doAjax function takes 2 arguments:
-		|	obj: `JSON` properties: {
+		|	obj: properties: {
 		|		check: `string` 'username' | 'email'
-		|		value: `string` 'value'
+		|		value: `string` value
 		|	},
 		|	callback: `function` arguments:
 		|		response: `string` response from the server | null on ajax error.
@@ -213,6 +213,4 @@
 			});
 		});
 	}());
-
-
 }());

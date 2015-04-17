@@ -3,28 +3,30 @@ ___TODO list___
 ----------------------------------
 JS/PHP
 ----------------------------------
-1.----[OK]Registation Page styles and some user-frendly text.[OK]----
-2. Header Links hrefs.
-3.----[OK]Logout Button.[OK]-----
-4.----[OK]When logout and browser remember Username and Password, The autologin submitting and login.[OK]-----
-5.----[OK] Forecast Configuration styles + handeling [esc] button event + handeling outside click event.[OK]-----
-6.----[OK]Add New Tab Form styles + handeling [esc] button event + handeling outside click event.[OK]----
-7. ----[~OK] Fav Form Accept button and Close Button or Deny Button implementation.
-8. [?]WallpapersWide copyrighting. Make some logo or owner information.
-9. [...] Fix mail pretended mode before deploying.
-0. Fix registration page input CSS transforming or disable it in old opera versions. + Check it on other browsers!
--. ----[~OK]---- Clear all favorites, Deactivate account (User settings) - implementation.
--. Fix Favorite options state - "Select Color" animation visual bug.
--. Registration at the server takes too long time. May be some SQL query or index issue. Check it, fix it...
--. --[~~ OK] Password recovery.
--. Registration error page styling (Don't confusing your life, Errors will be showed very few, or never).
--. ----[OK] Login page - Showing button - MUST REMOVE: NOTE text about autologin.
--. Registration form - disable submit button while not correct inputs. Or set minimum - maximum values (HTML5 style fixing)
+[ ? ask owner ] WallpapersWide copyrighting. Make some logo or owner information.
 
--. ----[OK]---- Pressing enter inside the login form or input - submits the form. Some times (when browser autocomplete is on), user can press enter to select an username. That makes a unnecessary submit.
+##############################
+
+[...] Fix mail pretended mode before deploying.
+
+##############################
+
+Fix registration page input CSS transforming or disable it in old opera versions. + Check it on other browsers!
+
+##############################
+
+Fix Favorite options state - "Select Color" animation visual bug.
+
+##############################
+
+-. Registration at the server takes too long time. May be some SQL query or index issue. Check it, fix it...
+
+##############################
+
+
 
 -----------------------------------
 Deployment/SQL/Other
 -----------------------------------
-1. Update database in openshift.
+1. ----[OK]---- Update database in openshift.
 2. 

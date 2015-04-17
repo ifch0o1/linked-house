@@ -1,3 +1,6 @@
+* {
+	outline: 0;
+}
 tr {
 	display: table-row;
 }
@@ -109,6 +112,9 @@ table {
 	transform: scale(0.9, 0.9);
 	-webkit-transition: box-shadow 0.4s, -webkit-transform 0.4s;
 	transition: box-shadow 0.4s, transform 0.4s;
+}
+#reg_submit[disabled="disabled"] {
+	background-color: #C5C5C5;
 }
 #reg_submit:focus {
 	box-shadow: 0px 6px 30px -12px;

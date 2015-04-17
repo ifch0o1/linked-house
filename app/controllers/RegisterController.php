@@ -44,9 +44,7 @@ class RegisterController extends Controller {
                 ))->render();
             exit;
         } else {
-            return View::make('usererror', array('title' => 'Registration Error',
-                'error_heading' => 'Registration error.',
-                'error_content' => 'Sorry... <br/> Something crashed... Try again after few minutes.'))->render();
+            return View::make('error_registration', array('title' => 'Registration Error'))->render();
 
             exit;
         }
