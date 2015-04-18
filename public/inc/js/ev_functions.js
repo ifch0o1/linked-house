@@ -39,11 +39,10 @@ function sendFavFormInformation(data) {
         dataType: 'json',
         data: data,
         success: function() {
-            return true;
+            // TODO
         },
         error: function(error) {
-            //TODO log
-            return false;
+            // TODO
         }
     });
 }
@@ -68,7 +67,7 @@ var favoriteExample = {
         var exampleUrl = isUrl(url) ? url : 'http://default.com';
         var initValues = {
             tabId: 1,
-            position: 10000,
+            position: 0,
             comment: comment,
             name: name,
             defaultUrl: exampleUrl,

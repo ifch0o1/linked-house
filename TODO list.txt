@@ -30,6 +30,12 @@ Header links hrefs
 Fix settings panel animation queue.
 
 ##############################
+
+!!! Remove client side `debug` before deploying !!!
+
+Code Fix (classes.js) -> some of the old classes (in the beginning of the file) has methods that contain workaround code.
+For example: `var that = this` is avoided. Part of the code which must be inside callback blocks is exported outside. That prevent the application to handle some important errors.
+
 ##############################
 ##############################
 ##############################

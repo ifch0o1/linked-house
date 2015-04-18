@@ -66,6 +66,7 @@ var Favorite = {
                 //TODO log, show user error.
                 if (debug) {
                     console.error('Cannot add favorite, server error occured.');
+                    console.error(error);
                 }
             }
         });
