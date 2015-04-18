@@ -199,7 +199,7 @@ include __DIR__ . '/inc/header.php';
 
  
     </div>
-    <a class="wallpaperswide_link" href="http://wallpaperswide.com/">WallpapersWide.com</a>
+    <a class="wallpaperswide_link" target="_blank" href="http://wallpaperswide.com/">WallpapersWide.com</a>
 
 </section>
 
