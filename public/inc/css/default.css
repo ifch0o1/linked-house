@@ -39,7 +39,8 @@ html, body {
 
 #wapper {
     background-color: #dedede;
-    height: 900px;
+    height: 95%;
+    min-height: 800px;
 }
 
 a, a:hover {
@@ -991,6 +992,7 @@ a, a:hover {
     padding: 10px;
     text-align: center;
     font-family: trebuc;
+    min-height: 3%;
 }
 
 .wallpaperswide_link {

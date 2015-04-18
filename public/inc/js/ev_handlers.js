@@ -82,6 +82,7 @@ $(document).ready(function() {
 
         FavFormEvent.activeInputKeyPress();
         FavFormEvent.activeColorClick();
+        FavFormEvent.autoCompleteHttpKeypress();
     });
 
     // Favorite form deactivation events
@@ -131,6 +132,34 @@ $(document).ready(function() {
             var e = $.Event('keypress');
             e.keyCode = 9; // Tab key
             $('#fav_form input').trigger(e);
+        },
+        autoCompleteHttpKeypress: function() {
+            var httpRe = /https?\:\/\//;
+            var shortHttpRe = /ht*p?\:?\/?$/;
+            $('#fav_form_url_input').unbind('keyup.httpComplete');
+            $('#fav_form_url_input').on('keyup.httpComplete', function() {
+                var val = $(this).val();
+                if (val.search(httpRe) !== 0) {
+                    // Check if 'http://' is not full
+                    if (shortHttpRe.test(val)) {
+                        $(this).val('http://');
+                    }
+                    else { // else put http:// preceding user input
+                        $(this).val('http://' + val);
+                    }
+                }
+            });
+            // Check if keydown is CTRL.
+            // Remove http:// -> in case the user wanna CTRL+V
+            $('#fav_form_url_input').unbind('keydown.controlCheck');
+            $('#fav_form_url_input').on('keydown.controlCheck', function(e) {
+                var isCtrlPressed = (e.keyCode || e.which) == 17;
+                var httpRegex = /ht*p?\:?\/?\/?$/;
+                var isHttpThere = httpRegex.test($(this).val());
+                if (isCtrlPressed && isHttpThere) {
+                    $(this).val('');
+                }
+            });
         },
         deactiveInputKeyPress: function() {
             $('#fav_form input').unbind('keypress');

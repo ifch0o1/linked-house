@@ -19,7 +19,7 @@ Fix Favorite options state - "Select Color" animation visual bug.
 
 ##############################
 
--. Registration at the server takes too long time. May be some SQL query or index issue. Check it, fix it...
+Registration at the server takes too long time. May be some SQL query or index issue. Check it, fix it...
 
 ##############################
 
