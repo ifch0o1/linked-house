@@ -1,0 +1,2 @@
+Copyright (C) Ivo Tanev
+This software is licensed under MTI License.

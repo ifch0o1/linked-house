@@ -1,0 +1,59 @@
+h1, h2, h3, h4 {
+	font-family: trebuc;
+}
+#wapper {
+	height: auto;
+	padding-bottom: 80px;
+}
+#overview-wrapper {
+	width: 700px;
+	margin: 40px auto auto;
+}
+
+#about-wrapper {
+	font-family: trebuc;
+	width: 700px;
+	margin: 40px auto auto;
+}
+#about-wrapper h2 {
+	margin-top: 20px;
+}
+.about-row {
+	display: inline-block; /* Fix inner p overflow */
+	margin-top: 20px;
+	font-size: 16px;
+	padding-right: 15px;
+	border: 3px solid;
+	width: 100%;
+	box-sizing: border-box;
+}
+.about-row > p {
+	display: inline-block;
+	width: 500px;
+	float: right;
+	margin-top: 15px;
+	padding-bottom: 15px;
+}
+.about-row a {
+	display: inline-block;
+	color: #008AFF;
+}
+.about-row a:hover {
+	color: #0076DA;
+}
+.about-row.custom-bookmarks {
+	background-color: #FFEAAE;
+	border-color: rgb(255, 190, 0);
+}
+.about-row.forecast {
+	background-color: #91D0FF;
+	border-color: #36BFFF;
+}
+.about-row.fast-links {
+	background-color: #FFB9AB;
+	border-color: #FF8F6B;
+}
+.about-row.about-app {
+	background-color: #E9E9E9;
+	border-color: #CBCBCB;
+}
