@@ -23,7 +23,7 @@
 <div id="about-wrapper">
 	<h1>About</h1>
 	<p>
-		This is online storage for bookmarks and favorite links (urls). <br/>
+		Linked House - Online storage for bookmarks and favorite links (urls). <br/>
 	</p>
 
 	<h2>Custom bookmarks</h2>
@@ -41,8 +41,8 @@
 	<div class="about-row forecast">
 		<img src="inc/img/icons/set-1/weather.png">
 		<p>
-			At your home page you'll see forecast panel. It shows 3 days ahead forecast for
-			choosen by you city.
+			At your home page you'll see forecast panel. It shows forecast for
+			choosen by you city. Powered by <a href="http://www.wunderground.com/">wUnderground.com</a>
 		</p>
 	</div>
 
@@ -61,7 +61,7 @@
 		<img src="inc/img/icons/set-1/experiment.png">
 		<p>
 			An idea - "independent bookmarks". As you know every browser keeps your bookmarks
-			at own storage, so you cannot access them between browsers. I using different browsers and I decided to develop an online storage for bookmarks with <strong>no browser dependency</strong>. Inside my mind it looks like a home page that redirects the user to the other pages, so I maded few other features like the slider and forecast for better look and feel.
+			at own storage, so you cannot access them between browsers. I using different browsers and I decided to develop an online storage for bookmarks with <strong>no browser dependency</strong>. Inside my mind it looks like a home page that redirects the user to the other pages, so I made few other features like the slider and forecast for better look and feel.
 			<br/>
 			<br/>
 			I am single web developer. You can contact me at ifch0o69@gmail.com
