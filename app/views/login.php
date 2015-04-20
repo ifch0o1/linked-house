@@ -1,26 +1,6 @@
 <?php include __DIR__.'/inc/header.php' ?>
+<link rel="stylesheet" type="text/css" href="/inc/css/header-buttons.css">
 <style type="text/css">
-    .header-btn {
-        margin: 20px 10px;
-        font-size: 12px;
-        text-align: center;
-        cursor: pointer;
-        line-height: 20px;
-        display: inline-block;
-        float:left;
-        height: 20px;
-        width: 90px;
-        background-color: #666666;
-    }
-    #register-btn {
-        margin-left: 120px;
-    }
-    #register-btn a {
-        color: #66cc66;
-    }
-    #login-btn a {
-        color: #6699cc;
-    }
     #login_wapper, #server-status-info, .login-note {
         width: 560px;
         margin-left: auto;

@@ -43,3 +43,7 @@ Route::post('request-password-recovery', function() {
 		return Response::make('invalid-request')->header('Content-Type', 'text/plain');
 	}
 });
+
+Route::get('about', function() {
+	return View::make('about', array('title' => 'About [Linked House]'));
+});

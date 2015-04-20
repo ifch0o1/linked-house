@@ -1,15 +1,3 @@
-// Login and auto login
-
-// TODO
-// IMPORTANT
-// TODO
-// Fix the bug with page refreshing while submitting
-// Because while refresh the page get parameters with username and PASSWORD
-// are showed in the window.location like GET request.
-
-// REMOVE CONSOLE LOGS...
-// They are writed while accepted or login submitted.
-
 'use strict';
 
 function WriteSpeed(inputElements, arrReference) {

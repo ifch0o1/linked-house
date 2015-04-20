@@ -16,28 +16,6 @@ table {
 	margin-right: auto;
 }
 
-.header-btn {
-    margin: 20px 10px;
-    font-size: 12px;
-    text-align: center;
-    cursor: pointer;
-    line-height: 20px;
-    display: inline-block;
-    float:left;
-    height: 20px;
-    width: 90px;
-    background-color: #666666;
-}
-#register-btn {
-    margin-left: 120px;
-}
-#register-btn a {
-	color: #66cc66;
-}
-#login-btn a {
-    color: #6699cc;
-}
-
 #registration_heading_text {
 	font-family: trebuc;
 	margin-top: 60px;

@@ -1,4 +1,5 @@
 <?php include __DIR__.'/inc/header.php' ?>
+<link rel="stylesheet" type="text/css" href="inc/css/header-buttons.css">
 <link type="text/css" rel="stylesheet" href="inc/css/registration.css">
 <header id="header">
     <div id="left_side_header">
