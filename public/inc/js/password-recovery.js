@@ -56,11 +56,15 @@
 			view.show();
 		});
 		view.submit.on('click', function() {
+			view.submit.prop('disabled', true);
 			if (view.input.val()) {
 				model.recoveryRequest(view.input.val()).then(function(data) {
 					view.alert(data);
 				}, function(err) {
 					view.alert(err);
+				})
+				.always(function() {
+					view.submit.prop('disabled', false);
 				});
 			}
 		});
