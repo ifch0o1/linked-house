@@ -31,18 +31,8 @@
 <script type="text/javascript" src="/inc/js/jquery-1.11.1-uncompressed.js"></script>
 
 <div id="header">
-    <div id="left_side_header">
-        <h1 id="app_name">Linked House</h1>
-        <ul id="header_links_list">
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">About</a></li>
-        </ul>
-    </div>
-
-    <div id="logo_holder">
-        <span id="logo_house" title="House"></span>
-    </div>
+    
+    <?php include __DIR__.'/inc/header-links.php' ?>
 
     <div id="right_side_header">
         <span id="user_home_text">

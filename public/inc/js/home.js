@@ -102,11 +102,13 @@ refreshFavoritesCount();
                 $('#disable_slider_checkbox').prop('checked', true);
             }
         }, function(err) {
-            // TODO
-            // Show user error.
+            if (debug) {
+                console.log(err);
+                if (err.stack) {
+                    console.error(err.stack);
+                }
+            }
         });
-
-    
 })();
 
 // Initialize forecast

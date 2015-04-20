@@ -2,18 +2,8 @@
 <link rel="stylesheet" type="text/css" href="inc/css/header-buttons.css">
 <link type="text/css" rel="stylesheet" href="inc/css/registration.css">
 <header id="header">
-    <div id="left_side_header">
-        <h1 id="app_name">Linked House</h1>
-        <ul id="header_links_list">
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">About</a></li>
-        </ul>
-    </div>
 
-    <div id="logo_holder">
-        <span id="logo_house" title="House"></span>
-    </div>
+    <?php include __DIR__.'/inc/header-links.php' ?>
 
     <div id="right_side_header">
         <span class="header-btn" id="register-btn">
@@ -67,8 +57,6 @@
         <input id="reg_submit" type="submit" value="Register" />
     </form>
 </div>
-<script type="text/javascript" src="inc/js/jquery-1.11.1-uncompressed.js"></script>
 <script type="text/javascript" src="inc/js/registration.js"></script>
-
 
 <?php include __DIR__.'/inc/footer.php'; ?>

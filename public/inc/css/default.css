@@ -119,6 +119,7 @@ a, a:hover {
     height: 60px;
     line-height: 60px;
     vertical-align: middle;
+    color: #fff;
 }
 
 #header_links_list, #header_links_list > li {
@@ -375,7 +376,7 @@ a, a:hover {
     position: relative;
     width: 25%;
     background-color: #fff;
-    color: #d1d1d1;
+    color: #BFBFBF;
     cursor: pointer;
     text-align: center;
 }
@@ -994,7 +995,13 @@ a, a:hover {
     font-family: trebuc;
     min-height: 3%;
 }
-
+#footer a {
+    display: inline-block;
+    color: #00C0FF;
+}
+#footer a:hover {
+    color: #008FBF;
+}
 .wallpaperswide_link {
     display: none;
     background-color: #DEDEDE;
