@@ -136,6 +136,9 @@ var LogerController = {
 	init: function() {
 		this._fixBrowserAutocompleteBug($('#name-input'), $('#password-input'));
 		this._customIntervalChecking();
+		if (isMobile()) {
+			this.disableAutoSubmit();
+		}
 	},
 	login: function() {
 		if (this.reqInProgress === true) {
