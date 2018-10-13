@@ -24,7 +24,7 @@
         background-color: #FFF;
         border-top: 3px solid #00BD00;
     }
-    a {
+    section a {
     	display: inline-block !important;
     }
 </style>

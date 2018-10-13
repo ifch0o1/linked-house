@@ -27,7 +27,7 @@
     #general-content.error p {
     	border-top: 3px solid red;
     }
-    a {
+    section a {
     	display: inline-block !important;
     }
 </style>

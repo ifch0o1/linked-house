@@ -1,5 +1,5 @@
 <?php include __DIR__.'/inc/header.php' ?>
-<link rel="stylesheet" type="text/css" href="/inc/css/header-buttons.css">
+<link rel="stylesheet" type="text/css" href="inc/css/header-buttons.css">
 <style type="text/css">
     #login_wapper, #server-status-info, .login-note {
         width: 560px;
@@ -178,6 +178,9 @@
                 <tr>
                     <td>Password: </td>
                     <td><input type="password" name="password" id="password-input"/></td>
+                </tr>
+                <tr>
+                    <td><a class="anchor-color" href="/register">You don't have account? Register now.</a></td>
                 </tr>
             </table>
             <span id="current-server-status-icon" class="server-status-icon server-waiting-icon"></span>
